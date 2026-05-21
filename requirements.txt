@@ -1,4 +1,7 @@
 asgiref==3.11.1
 Django==6.0.5
+django-environ==0.13.0
 django-htmx==1.27.0
+psycopg==3.3.4
+psycopg-binary==3.3.4
 sqlparse==0.5.5
