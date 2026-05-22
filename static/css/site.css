@@ -1,0 +1,52 @@
+@keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(1deg);
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .title {
+    /* Typography */
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.1;
+    text-align: center;
+    margin: 20px 0;
+  
+    /* The Wild Gradient Fill */
+    background: linear-gradient(45deg, #ff007f, #7f00ff, #00f0ff, #ff007f);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Crisp Outline to separate from the background */
+    -webkit-text-stroke: 1.5px #000;
+  
+    /* Intense 3D Comic-Book Style Text Shadow */
+    text-shadow: 
+      2px 2px 0px #000,
+      4px 4px 0px #ff007f,
+      6px 6px 0px #7f00ff,
+      8px 8px 0px #000,
+      12px 12px 20px rgba(0, 0, 0, 0.5);
+  
+    /* Animations */
+    animation: 
+      float 4s ease-in-out infinite,
+      gradient-shift 6s ease infinite;
+      
+    /* Keeps the animations smooth */
+    display: inline-block;
+    will-change: transform, background-position;
+  }
