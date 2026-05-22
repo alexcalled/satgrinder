@@ -18,6 +18,26 @@ jobs:
     name: Django checks
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: satgrinder
+          POSTGRES_USER: satgrinder
+          POSTGRES_PASSWORD: satgrinder
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U satgrinder -d satgrinder"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      SECRET_KEY: ci-secret-key
+      DEBUG: "False"
+      DATABASE_URL: postgres://satgrinder:satgrinder@localhost:5432/satgrinder
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -42,6 +62,9 @@ jobs:
 
       - name: Check Django project
         run: python manage.py check
+
+      - name: Run migrations
+        run: python manage.py migrate
 
       - name: Run tests
         run: python manage.py test
