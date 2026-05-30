@@ -1,12 +1,13 @@
 # Create your views here.
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 
 
 def landing(request):
     if request.user.is_authenticated:
         return redirect(home)
     return render(request, "landing.html")
+
 
 @login_required
 def home(request):
