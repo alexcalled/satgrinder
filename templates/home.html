@@ -1,4 +1,5 @@
 <!--About page-->
+{% load static %}
 <!doctype=html>
 <html>
     <head>
@@ -9,6 +10,9 @@
     </head>
     <body>
         <h1>If you see this it worked.</h1>
-        <a href="{% url 'index' %}">Go back.</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+        </form>
     </body>
 </html>
