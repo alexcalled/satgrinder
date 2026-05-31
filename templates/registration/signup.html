@@ -1,30 +1,26 @@
 {% extends "registration/base_auth.html" %}
 
-{% block title %}Log in | SATGrinder{% endblock %}
+{% block title %}Sign up | SATGrinder{% endblock %}
 
 {% block side_title %}
-Return to the grind.
+Create your SAT command center.
 {% endblock %}
 
 {% block eyebrow %}
-Welcome back
+New account
 {% endblock %}
 
 {% block heading %}
-Log in.
+Start grinding.
 {% endblock %}
 
 {% block subheading %}
-Pick up where you left off and keep pushing your score upward.
+Create an account and begin building a cleaner, more focused SAT prep routine.
 {% endblock %}
 
 {% block form %}
-<form class="auth-form" method="post" action="{% url 'login' %}">
+<form class="auth-form" method="post" action="{% url 'signup' %}">
   {% csrf_token %}
-
-  {% if next %}
-    <input type="hidden" name="next" value="{{ next }}">
-  {% endif %}
 
   {% if form.non_field_errors %}
     <div class="form-alert">
@@ -55,12 +51,12 @@ Pick up where you left off and keep pushing your score upward.
   {% endfor %}
 
   <button class="btn btn-primary btn-large auth-submit" type="submit">
-    Log in
+    Create account
   </button>
 
   <p class="auth-switch">
-    Need an account?
-    <a href="{% url 'signup' %}">Sign up</a>
+    Already have an account?
+    <a href="{% url 'login' %}">Log in</a>
   </p>
 </form>
 {% endblock %}

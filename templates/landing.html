@@ -1,19 +1,244 @@
-<!--Home page-->
-
+<!--Landing page-->
 {% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SATGrinder | SAT prep built for serious score gains</title>
+  <meta name="description" content="SATGrinder helps students practice smarter, track weak spots, and build the discipline needed for a higher SAT score.">
 
-<!doctype=html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
-        <title>SAT Grinder</title>
-        <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
-        <link rel="stylesheet" href="static/css/site.css">
-    </head>
-    <body>
-        <h1 class="title">SAT Grinder</h1>
-        <br>
-        <a href="{% url 'login' %}">Login</a>
-    </body>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+
+<body>
+  <div class="site-shell">
+    <header class="navbar">
+      <a class="brand" href="/" aria-label="SATGrinder home">
+        <span class="brand-mark">SG</span>
+        <span>SATGrinder</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#method">Method</a>
+        <a href="#stats">Results</a>
+      </nav>
+
+      <div class="nav-actions" hx-boost="true" hx-target="body" hx-swap="outerHTML show:top">
+        <a class="btn btn-ghost" href="{% url 'login' %}">Log in</a>
+        <a class="btn btn-primary" href="{% url 'signup' %}">Start grinding</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-pad">
+        <div class="hero-copy">
+          <p class="eyebrow">SAT prep without the fluff</p>
+
+          <h1>
+            The SAT Gamified: Grind your way
+            <span>to a 1600.</span>
+          </h1>
+
+          <p class="hero-text">
+            Optimize SAT learning through tageted practice, instant feedback, and active recall.
+            SAT Grinder finds your weaknesses and lets you grind your way to the top.
+          </p>
+
+          <div class="hero-actions" hx-boost="true" hx-target="body" hx-swap="outerHTML show:top">
+            <a class="btn btn-primary btn-large" href="{% url 'signup' %}">Create free account</a>
+            <a class="btn btn-glass btn-large" href="{% url 'login' %}">I already have one</a>
+          </div>
+
+          <div class="trust-row" aria-label="SATGrinder highlights">
+            <span>Adaptive practice</span>
+            <span>Weakness tracking</span>
+            <span>Daily grind mode</span>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="SATGrinder dashboard preview">
+          <div class="mock-window">
+            <div class="mock-topbar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="score-card">
+              <div>
+                <p>Projected score</p>
+                <strong>1460</strong>
+              </div>
+              <div class="score-ring">
+                <span>+180</span>
+              </div>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-card strong">
+                <span>Reading</span>
+                <br>
+                <strong>91%</strong>
+              </div>
+              <div class="mini-card">
+                <span>Writing</span>
+                <br>
+                <strong>84%</strong>
+              </div>
+              <div class="mini-card warning">
+                <span>Math</span>
+                <br>
+                <strong>73%</strong>
+              </div>
+            </div>
+
+            <div class="question-card">
+              <div class="question-meta">
+                <span>Current Drill</span>
+                <strong>Linear equations</strong>
+              </div>
+
+              <div class="bars" aria-hidden="true">
+                <span style="--w: 88%"></span>
+                <span style="--w: 64%"></span>
+                <span style="--w: 42%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stats" class="stats-band" aria-label="SATGrinder benefits">
+        <div class="stat">
+          <strong>250+</strong>
+          <span>average score increase</span>
+        </div>
+        <div class="stat">
+          <strong>4.9/5.0</strong>
+          <span>by SAT students</span>
+        </div>
+        <div class="stat">
+          <strong>99.2%</strong>
+          <span>improvement rate</span>
+        </div>
+      </section>
+
+      <section id="features" class="section-pad">
+        <div class="section-heading">
+          <p class="eyebrow">Built for consistency</p>
+          <h2>Everything that you need to grind smarter.</h2>
+          <p>
+            SAT Grinder turns studying into a focused training system, using performance data,
+             adaptive questions, and competitive features to keep you improving.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="icon-box">01</div>
+            <h3>Grind mode</h3>
+            <p>
+                Choose a topic and get algorithmically selected questions designed to target your current weaknesses.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">02</div>
+            <h3>Weakness detection</h3>
+            <p>
+                Our system tracks your mistakes, patterns, and accuracy to identify exactly where you need work.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">03</div>
+            <h3>ELO-Based Progress Tracking</h3>
+            <p>
+                Measure your skill level over time with a rating system and achievements that update as you practice.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">04</div>
+            <h3>Grind to the top</h3>
+            <p>
+                Compete with other students, climb the rankings, and stay motivated through visible progress.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="method-section section-pad">
+        <div class="method-copy">
+          <p class="eyebrow">The SATGrinder method</p>
+          <h2>Practice. Review. Repeat. No excuses.</h2>
+          <p>
+            Improvement comes from a tight loop: attempt problems, expose mistakes,
+            study the pattern, and return with better accuracy.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <span>1</span>
+            <div>
+              <h3>Diagnose</h3>
+              <p>Find the question types dragging your score down.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <span>2</span>
+            <div>
+              <h3>Attack</h3>
+              <p>Work focused sets until the skill stops being a weakness.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <span>3</span>
+            <div>
+              <h3>Review</h3>
+              <p>Turn every missed question into a repeatable lesson.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <span>4</span>
+            <div>
+              <h3>Lock in</h3>
+              <p>Build consistency through streaks, targets, and score tracking.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div>
+          <p class="eyebrow">Ready to work?</p>
+          <h2>Start your next SAT session with a plan.</h2>
+          <p>
+            Create an account, begin practicing, and let SATGrinder show you where to focus next.
+          </p>
+        </div>
+
+        <div class="cta-actions" hx-boost="true" hx-target="body" hx-swap="outerHTML show:top">
+          <a class="btn btn-primary btn-large" href="{% url 'signup' %}">Sign up</a>
+          <a class="btn btn-dark btn-large" href="{% url 'login' %}">Log in</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; {% now "Y" %} alexcalled, MIT licence.</p>
+      <div hx-boost="true" hx-target="body" hx-swap="outerHTML show:top">
+        <a href="{% url 'login' %}">Log in</a>
+        <a href="{% url 'signup' %}">Sign up</a>
+      </div>
+    </footer>
+  </div>
+</body>
 </html>

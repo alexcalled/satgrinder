@@ -1,18 +1,83 @@
-<!--About page-->
-{% load static %}
-<!doctype=html>
-<html>
-    <head>
-        <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
-        <meta charset="utf-8">
-        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
-        <title>SAT Grinder</title>
-    </head>
-    <body>
-        <h1>If you see this it worked.</h1>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Profile | SAT Grinder{% endblock %}
+
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+
+    <div class="profile-hero">
+        <div class="profile-banner">
+            <button class="settings-button" type="button" aria-label="Website settings">
+                <svg class="settings-gear" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.02-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1a7.28 7.28 0 0 0-1.69-.98L14.5 2.42A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42L9.13 5.07c-.61.24-1.18.56-1.69.98l-2.49-1a.5.5 0 0 0-.61.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.04.32-.07.65-.07.98s.02.66.07.98l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46c.13.22.39.31.61.22l2.49-1c.51.4 1.08.73 1.69.98l.37 2.65a.5.5 0 0 0 .5.42h4a.5.5 0 0 0 .5-.42l.37-2.65c.61-.24 1.18-.56 1.69-.98l2.49 1c.23.08.48 0 .61-.22l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="profile-main">
+            <div class="profile-picture">
+                <span>
+                    {% if request.user.is_authenticated %}
+                        {{ request.user.username|first|upper }}
+                    {% else %}
+                        SG
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="profile-identity">
+                <div class="username-stack">
+                    <h1>
+                        @
+                        {% if request.user.is_authenticated %}
+                            {{ request.user.username }}
+                        {% else %}
+                            username
+                        {% endif %}
+                    </h1>
+            
+                    <p class="profile-elo">
+                        {{ elo|default:"1200" }} ELO
+                    </p>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <article class="stat-card">
+            <p class="stat-label">Questions<br>Solved</p>
+            <strong class="stat-value">{{ questions_solved|default:"0" }}</strong>
+        </article>
+
+        <article class="stat-card">
+            <p class="stat-label">Minutes<br>Grinding</p>
+            <strong class="stat-value">{{ minutes_grinding|default:"0" }}</strong>
+        </article>
+
+        <article class="stat-card">
+            <p class="stat-label">Current<br>Streak</p>
+            <strong class="stat-value">{{ current_streak|default:"0" }}</strong>
+        </article>
+
+        <article class="stat-card">
+            <p class="stat-label">Accuracy<br>Rate</p>
+            <strong class="stat-value">{{ accuracy_rate|default:"0" }}%</strong>
+        </article>
+    </div>
+
+    <section class="dashboard-panel">
+        <div>
+            <p class="eyebrow">More Stats</p>
+            <h2>Performance overview</h2>
+            <p>
+                Work in progress. This section will show graphed score trends and progression.
+            </p>
+        </div>
+    </section>
+
+</section>
+{% endblock %}

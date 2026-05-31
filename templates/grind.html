@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Grind | SAT Grinder{% endblock %}
+
+{% block nav_grind %}active{% endblock %}
+
+{% block content %}
+<section class="grind-selection-page">
+
+    <div class="grind-selection-header">
+        <p class="eyebrow">Grind Mode</p>
+        <h1>Choose your section.</h1>
+        <p>
+            Pick a category and start working through adaptive SAT questions.
+        </p>
+    </div>
+
+    <div class="grind-mode-scroll" aria-label="SAT grind mode selection">
+
+        <article class="grind-mode-card grind-reading">
+            <div>
+                <span class="grind-mode-kicker">Evidence-Based</span>
+                <h2>Reading</h2>
+                <p>Practice comprehension, inference, vocabulary, and command of evidence.</p>
+            </div>
+
+            <button
+                type="button"
+                class="grind-start-button"
+                hx-get="{% url 'grind_modal' 'reading' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
+            >
+                Start
+            </button>
+        </article>
+
+        <article class="grind-mode-card grind-writing">
+            <div>
+                <span class="grind-mode-kicker">Grammar & Style</span>
+                <h2>Writing</h2>
+                <p>Improve punctuation, transitions, sentence structure, and rhetorical skill.</p>
+            </div>
+
+            <button
+                type="button"
+                class="grind-start-button"
+                hx-get="{% url 'grind_modal' 'writing' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
+            >
+                Start
+            </button>
+        </article>
+
+        <article class="grind-mode-card grind-math">
+            <div>
+                <span class="grind-mode-kicker">Problem Solving</span>
+                <h2>Math</h2>
+                <p>Train algebra, functions, geometry, data analysis, and advanced math.</p>
+            </div>
+
+            <button
+                type="button"
+                class="grind-start-button"
+                hx-get="{% url 'grind_modal' 'math' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
+            >
+                Start
+            </button>
+        </article>
+
+        <article class="grind-mode-card grind-custom">
+            <div>
+                <span class="grind-mode-kicker">Personalized</span>
+                <h2>Custom</h2>
+                <p>Build a custom grind session based on topic, difficulty, or weak areas.</p>
+            </div>
+
+            <a href="#" class="grind-start-button">
+                Build
+            </a>
+        </article>
+
+    </div>
+
+</section>
+
+<div id="modal-root"></div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SATGrinder{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+
+<body class="auth-body">
+  <main class="auth-page">
+    <section class="auth-brand-panel">
+      <a class="brand auth-brand" href="/" aria-label="SATGrinder home">
+        <span class="brand-mark">SG</span>
+        <span>SATGrinder</span>
+      </a>
+
+      <div class="auth-brand-copy">
+        <p class="eyebrow">Score gains start here</p>
+        <h1>{% block side_title %}Grind smarter. Score higher.{% endblock %}</h1>
+        <p>
+          Focused SAT practice, weakness tracking, and a clean study loop built for students
+          who are serious about improving.
+        </p>
+      </div>
+
+      <div class="auth-mini-stack" aria-label="SATGrinder highlights">
+        <div>
+          <strong>Daily drills</strong>
+          <span>Build consistency without overthinking what to study next.</span>
+        </div>
+        <div>
+          <strong>Weakness targeting</strong>
+          <span>Spend time on the skills actually costing you points.</span>
+        </div>
+        <div>
+          <strong>Review loop</strong>
+          <span>Turn missed questions into repeatable lessons.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="auth-card-header">
+        <p class="eyebrow">{% block eyebrow %}{% endblock %}</p>
+        <h2 id="auth-title">{% block heading %}{% endblock %}</h2>
+        <p>{% block subheading %}{% endblock %}</p>
+      </div>
+
+      {% block form %}{% endblock %}
+    </section>
+  </main>
+</body>
+</html>

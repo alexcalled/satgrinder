@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}SAT Grinder{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/web.css' %}">
+
+    <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <header class="top-header">
+            <a href="{% url 'home' %}" class="brand">
+                <span class="brand-mark">SG</span>
+                <span class="brand-text">SAT Grinder</span>
+            </a>
+
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    Log out
+                </button>
+            </form>
+        </header>
+
+        <main class="page-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <nav class="bottom-nav" aria-label="Main navigation">
+            <a href="{% url 'home' %}" class="bottom-nav-item {% block nav_home %}{% endblock %}">
+                <span class="nav-icon">◯</span>
+                <span class="nav-label">Profile</span>
+            </a>
+
+            <a href="{% url 'grind' %}" class="bottom-nav-item {% block nav_grind %}{% endblock %}">
+                <span class="nav-icon">✦</span>
+                <span class="nav-label">Grind</span>
+            </a>
+
+            <a href="{% url 'leaderboard' %}" class="bottom-nav-item {% block nav_leaderboard %}{% endblock %}">
+                <span class="nav-icon">△</span>
+                <span class="nav-label">Leaderboard</span>
+            </a>
+        </nav>
+
+    </div>
+</body>
+</html>
