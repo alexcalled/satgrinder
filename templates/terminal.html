@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terminal | SAT Grinder{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/grinder.css' %}">
+{% endblock %}
+
+{% block nav_grind %}active{% endblock %}
+
+{% block content %}
+<section class="terminal-page">
+
+    {% if question %}
+        <article class="terminal-card">
+
+            <div class="terminal-header">
+                <p class="eyebrow">
+                    {{ question.skill.domain.category.name }}
+                    ·
+                    {{ question.skill.domain.name }}
+                </p>
+
+                <h1>{{ question.skill.name }}</h1>
+            </div>
+
+            <div class="question-block">
+                <p>{{ question.prompt|linebreaksbr }}</p>
+            </div>
+
+            <form
+                method="post"
+                action="{% url 'grind:submit_answer' question.id %}"
+                class="choice-form"
+            >
+                {% csrf_token %}
+
+                <div class="choice-list">
+                    {% for choice in question.choices.all %}
+                        <label class="choice-option">
+                            <input
+                                type="radio"
+                                name="choice"
+                                value="{{ choice.id }}"
+                                required
+                            >
+
+                            <span>{{ choice.text }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="terminal-submit-button">
+                    Submit Answer
+                </button>
+            </form>
+
+        </article>
+    {% else %}
+        <article class="terminal-card terminal-empty">
+            <p class="eyebrow">Complete</p>
+
+            <h1>No questions left.</h1>
+
+            <p>
+                You have already attempted every active question in this selected grind set.
+            </p>
+
+            <a href="{% url 'grind:category_select' %}" class="terminal-submit-button">
+                Choose Another Section
+            </a>
+        </article>
+    {% endif %}
+
+</section>
+{% endblock %}

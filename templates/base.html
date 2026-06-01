@@ -12,6 +12,7 @@
     </title>
 
     <link rel="stylesheet" href="{% static 'css/web.css' %}">
+    {% block extra_css %}{% endblock %}
 
     <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 </head>
@@ -44,7 +45,7 @@
                 <span class="nav-label">Profile</span>
             </a>
 
-            <a href="{% url 'grind' %}" class="bottom-nav-item {% block nav_grind %}{% endblock %}">
+            <a href="{% url 'grind:category_select' %}" class="bottom-nav-item {% block nav_grind %}{% endblock %}">
                 <span class="nav-icon">✦</span>
                 <span class="nav-label">Grind</span>
             </a>
@@ -56,5 +57,6 @@
         </nav>
 
     </div>
+    <div id="modal-root"></div>
 </body>
 </html>

@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Grind | SAT Grinder{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/grinder.css' %}">
+{% endblock %}
 
 {% block nav_grind %}active{% endblock %}
 
@@ -27,7 +32,7 @@
             <button
                 type="button"
                 class="grind-start-button"
-                hx-get="{% url 'grind_modal' 'reading' %}"
+                hx-get="{% url 'grind:category_modal' 'reading' %}"
                 hx-target="#modal-root"
                 hx-swap="innerHTML"
             >
@@ -45,7 +50,7 @@
             <button
                 type="button"
                 class="grind-start-button"
-                hx-get="{% url 'grind_modal' 'writing' %}"
+                hx-get="{% url 'grind:category_modal' 'writing' %}"
                 hx-target="#modal-root"
                 hx-swap="innerHTML"
             >
@@ -63,7 +68,7 @@
             <button
                 type="button"
                 class="grind-start-button"
-                hx-get="{% url 'grind_modal' 'math' %}"
+                hx-get="{% url 'grind:category_modal' 'math' %}"
                 hx-target="#modal-root"
                 hx-swap="innerHTML"
             >
@@ -87,5 +92,4 @@
 
 </section>
 
-<div id="modal-root"></div>
 {% endblock %}

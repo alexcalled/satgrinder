@@ -1,0 +1,377 @@
+.grind-selection-page {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2rem);
+}
+
+.grind-selection-header {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at top left, rgba(59, 115, 95, 0.13), transparent 18rem),
+        var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.grind-selection-header h1 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    line-height: 0.92;
+    letter-spacing: -0.08em;
+}
+
+.grind-selection-header p:not(.eyebrow) {
+    max-width: 48ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.grind-mode-scroll {
+    display: grid;
+    gap: 1rem;
+    max-height: calc(100vh - 260px);
+    min-height: 420px;
+    overflow-y: auto;
+    padding: 0.15rem 0.25rem 1rem;
+    scroll-snap-type: y mandatory;
+}
+
+.grind-mode-card {
+    min-height: clamp(190px, 32vw, 280px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: clamp(1.35rem, 4vw, 2.4rem);
+    border-radius: var(--radius-lg);
+    color: #151020;
+    box-shadow: 0 18px 38px rgba(31, 42, 36, 0.12);
+    scroll-snap-align: start;
+}
+
+.grind-mode-kicker {
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 0.75rem;
+    padding: 0.42rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.48);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.grind-mode-card h2 {
+    margin: 0;
+    font-size: clamp(3rem, 9vw, 6.25rem);
+    line-height: 0.82;
+    letter-spacing: -0.09em;
+}
+
+.grind-mode-card p {
+    max-width: 42ch;
+    margin: 1rem 0 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgba(21, 16, 32, 0.72);
+    font-weight: 650;
+}
+
+.grind-start-button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 7.5rem;
+    min-height: 3.4rem;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.85rem 1.35rem;
+    background: rgba(255, 255, 255, 0.58);
+    color: #151020;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(31, 42, 36, 0.1);
+}
+
+.grind-start-button:hover {
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.grind-reading {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.58), transparent 15rem),
+        linear-gradient(135deg, #b8d8ff, #7fb1f2);
+}
+
+.grind-writing {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.58), transparent 15rem),
+        linear-gradient(135deg, #c7adff, #a98cf2);
+}
+
+.grind-math {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.58), transparent 15rem),
+        linear-gradient(135deg, #bcefd1, #75c995);
+}
+
+.grind-custom {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.58), transparent 15rem),
+        linear-gradient(135deg, #ffd6a8, #f2a85d);
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(31, 42, 36, 0.32);
+    backdrop-filter: blur(10px);
+}
+
+.grind-modal {
+    position: relative;
+    width: min(100%, 560px);
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at top left, rgba(59, 115, 95, 0.12), transparent 16rem),
+        var(--surface);
+    box-shadow: 0 28px 80px rgba(31, 42, 36, 0.24);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: white;
+    color: var(--text);
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close-button:hover {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+}
+
+.grind-modal h2 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.2rem, 7vw, 4.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.08em;
+}
+
+.grind-modal p:not(.eyebrow) {
+    margin: 1rem 0 0;
+    max-width: 48ch;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.modal-secondary-button,
+.modal-continue-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.1rem;
+    border-radius: 999px;
+    padding: 0.8rem 1.2rem;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.modal-secondary-button {
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--text);
+}
+
+.modal-continue-button {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 12px 28px rgba(59, 115, 95, 0.22);
+}
+
+.modal-continue-button:hover {
+    background: var(--accent-dark);
+}
+
+.terminal-page {
+    display: grid;
+    place-items: start center;
+}
+
+.terminal-card {
+    width: min(100%, 850px);
+    padding: clamp(1.4rem, 5vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at top left, rgba(59, 115, 95, 0.11), transparent 18rem),
+        var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.terminal-header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.075em;
+}
+
+.question-block {
+    margin-top: 1.5rem;
+    padding: clamp(1.2rem, 4vw, 1.8rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-soft);
+}
+
+.question-block p {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.choice-form {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.choice-list {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.choice-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: white;
+    cursor: pointer;
+}
+
+.choice-option:hover {
+    border-color: rgba(59, 115, 95, 0.35);
+    background: var(--accent-soft);
+}
+
+.choice-option input {
+    margin-top: 0.28rem;
+    accent-color: var(--accent);
+}
+
+.choice-option span {
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 650;
+}
+
+.terminal-submit-button {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.2rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 0.85rem 1.4rem;
+    background: var(--accent);
+    color: white;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(59, 115, 95, 0.22);
+}
+
+.terminal-submit-button:hover {
+    background: var(--accent-dark);
+}
+
+.terminal-empty h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.08em;
+}
+
+.terminal-empty p:not(.eyebrow) {
+    max-width: 48ch;
+    margin: 1rem 0 1.5rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+    .grind-mode-scroll {
+        max-height: none;
+        min-height: 0;
+        overflow-y: visible;
+        scroll-snap-type: none;
+    }
+
+    .grind-mode-card {
+        min-height: 210px;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .grind-start-button {
+        align-self: flex-end;
+    }
+
+    .modal-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .modal-secondary-button,
+    .modal-continue-button {
+        width: 100%;
+    }
+
+    .terminal-submit-button {
+        width: 100%;
+        justify-self: stretch;
+    }
+}

@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 
@@ -36,35 +36,6 @@ def home(request):
 @login_required
 def leaderboard(request):
     return render(request, "leaderboard.html")
-
-
-@login_required
-def grind(request):
-    return render(request, "grind.html")
-
-
-def grind_modal(request, mode):
-    mode_labels = {
-        "reading": "Reading",
-        "writing": "Writing",
-        "math": "Math",
-    }
-
-    if mode not in mode_labels:
-        raise Http404("Invalid grind mode.")
-
-    return render(
-        request,
-        "partials/grind_modal.html",
-        {
-            "mode": mode,
-            "mode_label": mode_labels[mode],
-        },
-    )
-
-
-def grind_modal_close(request):
-    return HttpResponse("")
 
 
 def catchall_view(request, path):

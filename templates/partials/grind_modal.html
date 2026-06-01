@@ -5,40 +5,45 @@
             type="button"
             class="modal-close-button"
             aria-label="Close modal"
-            hx-get="{% url 'grind_modal_close' %}"
-            hx-target="closest .modal-backdrop"
-            hx-swap="delete"
+            hx-get="{% url 'grind:close_modal' %}"
+            hx-target="#modal-root"
+            hx-swap="innerHTML"
         >
             ×
         </button>
 
-        <p class="eyebrow">{{ mode_label }} Grind</p>
+        <p class="eyebrow">{{ category_name }} Grind</p>
 
         <h2 id="grind-modal-title">
-            Start {{ mode_label }} practice?
+            Start {{ category_name }} practice?
         </h2>
 
         <p>
-            All questions are multiple-choice with four answer choices. Each question has a single best answer.
-            Use of a calculator is permitted for all questions. A reference sheet and calculator can be accessed 
-            in the top bar.
+            This session will pull questions from every active skill under the
+            {{ category_name }} category.
         </p>
 
-        <div class="modal-actions">
+        <form
+            method="post"
+            action="{% url 'grind:start_category' category_slug %}"
+            class="modal-actions"
+        >
+            {% csrf_token %}
+
             <button
                 type="button"
                 class="modal-secondary-button"
-                hx-get="{% url 'grind_modal_close' %}"
-                hx-target="closest .modal-backdrop"
-                hx-swap="delete"
+                hx-get="{% url 'grind:close_modal' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
             >
                 Cancel
             </button>
 
-            <a href="#" class="modal-continue-button">
+            <button type="submit" class="modal-continue-button">
                 Continue
-            </a>
-        </div>
+            </button>
+        </form>
 
     </section>
 </div>
