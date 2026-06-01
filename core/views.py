@@ -1,8 +1,13 @@
+from datetime import timedelta
+
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.utils import timezone
+
+from grinder.models import QuestionAttempt, UserElo
 
 
 def landing(request):
@@ -30,7 +35,34 @@ def signup(request):
 
 @login_required
 def home(request):
-    return render(request, "home.html")
+    attempts = QuestionAttempt.objects.filter(user=request.user)
+    questions_solved = attempts.count()
+    correct_answers = attempts.filter(is_correct=True).count()
+    accuracy_rate = round((correct_answers / questions_solved) * 100) if questions_solved else 0
+    attempt_dates = {
+        timezone.localtime(attempted_at).date()
+        for attempted_at in attempts.values_list("time_attempted", flat=True)
+    }
+    current_streak = 0
+    streak_date = timezone.localdate()
+
+    while streak_date in attempt_dates:
+        current_streak += 1
+        streak_date -= timedelta(days=1)
+
+    user_elo = UserElo.recalculate_for(request.user)
+
+    return render(
+        request,
+        "home.html",
+        {
+            "elo": user_elo.elo,
+            "questions_solved": questions_solved,
+            "minutes_grinding": 0,
+            "current_streak": current_streak,
+            "accuracy_rate": accuracy_rate,
+        },
+    )
 
 
 @login_required

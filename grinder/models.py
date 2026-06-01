@@ -1,5 +1,9 @@
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+SAT_ELO_MAX = 1600
+SAT_SKILL_COUNT = 29
 
 
 class Category(models.Model):
@@ -43,6 +47,76 @@ class Question(models.Model):
         return self.prompt[:50]
 
 
+class UserSkillCompetence(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="skill_competences"
+    )
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name="user_competences")
+    competence = models.FloatField(
+        default=0.0,
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "skill"],
+                name="unique_competence_per_user_skill",
+            )
+        ]
+
+    @classmethod
+    def recalculate_for(cls, user, skill):
+        attempts = QuestionAttempt.objects.filter(user=user, question__skill=skill)
+        attempt_count = attempts.count()
+        competence = 0.0
+
+        if attempt_count:
+            correct_count = attempts.filter(is_correct=True).count()
+            competence = correct_count / attempt_count
+
+        user_skill_competence, _ = cls.objects.update_or_create(
+            user=user,
+            skill=skill,
+            defaults={"competence": competence},
+        )
+        return user_skill_competence
+
+    def __str__(self):
+        return f"{self.user} —— {self.skill}: {self.competence:.2f}"
+
+
+class UserElo(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="elo_stat"
+    )
+    elo = models.PositiveSmallIntegerField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(SAT_ELO_MAX)],
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def recalculate_for(cls, user):
+        competence_total = sum(
+            UserSkillCompetence.objects.filter(user=user).values_list(
+                "competence", flat=True
+            )
+        )
+        elo = round((SAT_ELO_MAX / SAT_SKILL_COUNT) * competence_total)
+        elo = max(0, min(SAT_ELO_MAX, elo))
+
+        user_elo, _ = cls.objects.update_or_create(
+            user=user,
+            defaults={"elo": elo},
+        )
+        return user_elo
+
+    def __str__(self):
+        return f"{self.user} —— {self.elo} ELO"
+
+
 class AnswerChoice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
     text = models.TextField()
@@ -65,7 +139,7 @@ class QuestionAttempt(models.Model):
 
     def save(self, *args, **kwargs):
         self.is_correct = self.selected_choice.is_correct
-        super.save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user} —— {self.question}"

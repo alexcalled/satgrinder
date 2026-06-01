@@ -3,7 +3,15 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from .models import AnswerChoice, Category, Question, QuestionAttempt, Skill
+from .models import (
+    AnswerChoice,
+    Category,
+    Question,
+    QuestionAttempt,
+    Skill,
+    UserElo,
+    UserSkillCompetence,
+)
 
 CATEGORY_LABELS = {
     "reading": "Reading",
@@ -120,6 +128,8 @@ def submit_answer(request, question_id):
             "selected_choice": selected_choice,
         },
     )
+    UserSkillCompetence.recalculate_for(request.user, question.skill)
+    UserElo.recalculate_for(request.user)
 
     return redirect("grind:terminal")
 
