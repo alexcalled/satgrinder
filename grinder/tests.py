@@ -20,9 +20,7 @@ class UserSkillCompetenceTests(TestCase):
             username="student", password="test-password"
         )
         self.category = Category.objects.create(name="Math", slug="math")
-        self.domain = Domain.objects.create(
-            category=self.category, name="Algebra", slug="algebra"
-        )
+        self.domain = Domain.objects.create(category=self.category, name="Algebra", slug="algebra")
         self.skill = Skill.objects.create(
             domain=self.domain, name="Linear equations", slug="linear-equations"
         )
@@ -82,12 +80,8 @@ class UserSkillCompetenceTests(TestCase):
         self.assertEqual(competence.competence, 0.5)
 
     def test_user_elo_combines_skill_competence_on_29_skill_scale(self):
-        UserSkillCompetence.objects.create(
-            user=self.user, skill=self.skill, competence=0.5
-        )
-        UserSkillCompetence.objects.create(
-            user=self.user, skill=self.other_skill, competence=1.0
-        )
+        UserSkillCompetence.objects.create(user=self.user, skill=self.skill, competence=0.5)
+        UserSkillCompetence.objects.create(user=self.user, skill=self.other_skill, competence=1.0)
 
         user_elo = UserElo.recalculate_for(self.user)
 

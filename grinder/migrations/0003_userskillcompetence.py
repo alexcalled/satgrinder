@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("grinder", "0002_domain_skill_and_more"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

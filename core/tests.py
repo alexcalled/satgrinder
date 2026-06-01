@@ -15,9 +15,7 @@ from grinder.models import (
 
 class HomeDashboardTests(TestCase):
     def test_home_displays_collected_user_stats(self):
-        user = get_user_model().objects.create_user(
-            username="student", password="test-password"
-        )
+        user = get_user_model().objects.create_user(username="student", password="test-password")
         category = Category.objects.create(name="Math", slug="math")
         domain = Domain.objects.create(category=category, name="Algebra", slug="algebra")
         skill = Skill.objects.create(

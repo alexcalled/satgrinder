@@ -100,9 +100,7 @@ class UserElo(models.Model):
     @classmethod
     def recalculate_for(cls, user):
         competence_total = sum(
-            UserSkillCompetence.objects.filter(user=user).values_list(
-                "competence", flat=True
-            )
+            UserSkillCompetence.objects.filter(user=user).values_list("competence", flat=True)
         )
         elo = round((SAT_ELO_MAX / SAT_SKILL_COUNT) * competence_total)
         elo = max(0, min(SAT_ELO_MAX, elo))
