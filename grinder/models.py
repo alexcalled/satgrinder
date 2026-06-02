@@ -115,6 +115,61 @@ class UserElo(models.Model):
         return f"{self.user} —— {self.elo} ELO"
 
 
+class UserDomainElo(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="domain_elos"
+    )
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name="user_elos")
+    competence = models.FloatField(
+        default=0.0,
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+    )
+    elo = models.PositiveSmallIntegerField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(SAT_ELO_MAX)],
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "domain"],
+                name="unique_domain_elo_per_user_domain",
+            )
+        ]
+
+    @classmethod
+    def recalculate_for(cls, user, domain):
+        skills = domain.skills.filter(is_active=True)
+        skill_count = skills.count()
+        competence_total = sum(
+            UserSkillCompetence.objects.filter(user=user, skill__in=skills).values_list(
+                "competence", flat=True
+            )
+        )
+        competence = competence_total / skill_count if skill_count else 0.0
+        competence = max(0.0, min(1.0, competence))
+        elo = round(SAT_ELO_MAX * competence)
+
+        user_domain_elo, _ = cls.objects.update_or_create(
+            user=user,
+            domain=domain,
+            defaults={
+                "competence": competence,
+                "elo": elo,
+            },
+        )
+        return user_domain_elo
+
+    @classmethod
+    def recalculate_all_for(cls, user):
+        domains = Domain.objects.filter(is_active=True, category__is_active=True)
+        return [cls.recalculate_for(user, domain) for domain in domains]
+
+    def __str__(self):
+        return f"{self.user} —— {self.domain}: {self.elo} ELO"
+
+
 class AnswerChoice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
     text = models.TextField()

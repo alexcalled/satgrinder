@@ -1,0 +1,47 @@
+<section
+    class="dashboard-panel performance-overview-panel"
+    aria-labelledby="performance-overview-heading"
+>
+    <div class="overview-score">
+        <p class="eyebrow">Predicted SAT</p>
+        <h2 id="performance-overview-heading">{{ elo|default:"0" }}</h2>
+        <p>ELO</p>
+    </div>
+
+    <div class="domain-breakdown" aria-label="SAT domain rating breakdown">
+        {% for group in domain_groups %}
+            <section class="domain-section domain-section-{{ group.slug }}">
+                <div class="domain-section-header">
+                    <h3>{{ group.label }}</h3>
+                    <span>{{ group.domains|length }} domains</span>
+                </div>
+
+                <div class="domain-list">
+                    {% for domain in group.domains %}
+                        <div class="domain-row">
+                            <div class="domain-row-top">
+                                <span class="domain-name">{{ domain.name }}</span>
+                                <span class="domain-rating">{{ domain.rating }}</span>
+                            </div>
+
+                            <div
+                                class="domain-bar"
+                                role="meter"
+                                aria-label="{{ domain.name }} competence"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="{{ domain.competence_percent }}"
+                            >
+                                <span
+                                    style="--domain-fill: {{ domain.competence_percent }}%;"
+                                ></span>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="domain-empty">No domains yet.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+</section>

@@ -7,7 +7,35 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
-from grinder.models import QuestionAttempt, UserElo
+from grinder.models import Domain, QuestionAttempt, UserDomainElo, UserElo
+
+
+def build_domain_groups(user):
+    domain_elos = {
+        domain_elo.domain_id: domain_elo for domain_elo in UserDomainElo.recalculate_all_for(user)
+    }
+    domains = list(
+        Domain.objects.filter(is_active=True, category__is_active=True).select_related("category")
+    )
+    category_order = {"reading": 0, "writing": 1, "math": 2}
+    domains.sort(key=lambda domain: (category_order.get(domain.category.slug, 3), domain.name))
+    groups = {
+        "math": {"label": "Math", "slug": "math", "domains": []},
+        "rw": {"label": "R&W", "slug": "rw", "domains": []},
+    }
+
+    for domain in domains:
+        domain_elo = domain_elos.get(domain.id)
+        competence = domain_elo.competence if domain_elo else 0.0
+        domain_data = {
+            "name": domain.name,
+            "rating": domain_elo.elo if domain_elo else 0,
+            "competence_percent": round(competence * 100),
+        }
+        group_key = "math" if domain.category.slug == "math" else "rw"
+        groups[group_key]["domains"].append(domain_data)
+
+    return [groups["math"], groups["rw"]]
 
 
 def landing(request):
@@ -51,12 +79,14 @@ def home(request):
         streak_date -= timedelta(days=1)
 
     user_elo = UserElo.recalculate_for(request.user)
+    domain_groups = build_domain_groups(request.user)
 
     return render(
         request,
         "home.html",
         {
             "elo": user_elo.elo,
+            "domain_groups": domain_groups,
             "questions_solved": questions_solved,
             "minutes_grinding": 0,
             "current_streak": current_streak,

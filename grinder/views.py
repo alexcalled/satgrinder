@@ -9,6 +9,7 @@ from .models import (
     Question,
     QuestionAttempt,
     Skill,
+    UserDomainElo,
     UserElo,
     UserSkillCompetence,
 )
@@ -129,6 +130,7 @@ def submit_answer(request, question_id):
         },
     )
     UserSkillCompetence.recalculate_for(request.user, question.skill)
+    UserDomainElo.recalculate_for(request.user, question.skill.domain)
     UserElo.recalculate_for(request.user)
 
     return redirect("grind:terminal")

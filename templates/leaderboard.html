@@ -5,11 +5,91 @@
 {% block nav_leaderboard %}active{% endblock %}
 
 {% block content %}
-<section class="empty-page">
-    <div class="empty-card">
-        <p class="eyebrow">Leaderboard</p>
-        <h1>The leaderboard will go here.</h1>
-        <p>Rank students by points, streaks, mastery, weekly grind time, or score improvement.</p>
+<section class="leaderboard-page">
+    <div class="leaderboard-header">
+        <div>
+            <p class="eyebrow">Leaderboard</p>
+            <h1>Top grinders.</h1>
+        </div>
+
+        <div class="leaderboard-season">
+            <span>Weekly Scores</span>
+            <strong>June 1-7</strong>
+        </div>
     </div>
+
+    <section class="podium-grid" aria-label="Top three students">
+        <article class="podium-card podium-second">
+            <span class="podium-rank">2</span>
+            <div class="podium-avatar">MZ</div>
+            <h2>Marcus Z.</h2>
+            <p>1550 ELO</p>
+            <strong>+112</strong>
+        </article>
+
+        <article class="podium-card podium-first">
+            <span class="podium-rank">1</span>
+            <div class="podium-avatar">YZ</div>
+            <h2>中文名称</h2>
+            <p>1600 ELO</p>
+            <strong>+146</strong>
+        </article>
+
+        <article class="podium-card podium-third">
+            <span class="podium-rank">3</span>
+            <div class="podium-avatar">ND</div>
+            <h2>Nick D.</h2>
+            <p>1520 ELO</p>
+            <strong>+97</strong>
+        </article>
+    </section>
+
+    <section class="leaderboard-table-card" aria-labelledby="leaderboard-table-heading">
+        <div class="leaderboard-table-header">
+            <div>
+                <p class="eyebrow">Standings</p>
+                <h2 id="leaderboard-table-heading">Class ranking</h2>
+            </div>
+
+            <span>Static preview</span>
+        </div>
+
+        <div class="leaderboard-list">
+            <div class="leaderboard-row">
+                <span class="leaderboard-place">4</span>
+                <span class="leaderboard-player">Lucas C.</span>
+                <span class="leaderboard-pill">+15</span>
+                <strong>1480</strong>
+            </div>
+
+            <div class="leaderboard-row">
+                <span class="leaderboard-place">5</span>
+                <span class="leaderboard-player">Travis S.</span>
+                <span class="leaderboard-pill">+80</span>
+                <strong>1460</strong>
+            </div>
+
+            <div class="leaderboard-row">
+                <span class="leaderboard-place">6</span>
+                <span class="leaderboard-player">Andy G.</span>
+                <span class="leaderboard-pill">-20</span>
+                <strong>1390</strong>
+            </div>
+
+            <div class="leaderboard-row">
+                <span class="leaderboard-place">7</span>
+                <span class="leaderboard-player">Benjamin S.</span>
+                <span class="leaderboard-pill">+40</span>
+                <strong>1330</strong>
+            </div>
+
+            <div class="leaderboard-row">
+                <span class="leaderboard-place">8</span>
+                <span class="leaderboard-player">Prajeet N.</span>
+                <span class="leaderboard-pill">+0</span>
+                <strong>1295</strong>
+            </div>
+        </div>
+    </section>
 </section>
 {% endblock %}

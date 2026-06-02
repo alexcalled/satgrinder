@@ -7,6 +7,7 @@ from .models import (
     Question,
     QuestionAttempt,
     Skill,
+    UserDomainElo,
     UserElo,
     UserSkillCompetence,
 )
@@ -18,4 +19,5 @@ admin.site.register(QuestionAttempt)
 admin.site.register(Domain)
 admin.site.register(Skill)
 admin.site.register(UserSkillCompetence)
+admin.site.register(UserDomainElo)
 admin.site.register(UserElo)

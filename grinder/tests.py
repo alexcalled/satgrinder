@@ -1,4 +1,10 @@
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.urls import reverse
 
@@ -9,6 +15,7 @@ from .models import (
     Question,
     QuestionAttempt,
     Skill,
+    UserDomainElo,
     UserElo,
     UserSkillCompetence,
 )
@@ -78,6 +85,9 @@ class UserSkillCompetenceTests(TestCase):
 
         competence = UserSkillCompetence.objects.get(user=self.user, skill=self.skill)
         self.assertEqual(competence.competence, 0.5)
+        domain_elo = UserDomainElo.objects.get(user=self.user, domain=self.domain)
+        self.assertEqual(domain_elo.competence, 0.25)
+        self.assertEqual(domain_elo.elo, 400)
 
     def test_user_elo_combines_skill_competence_on_29_skill_scale(self):
         UserSkillCompetence.objects.create(user=self.user, skill=self.skill, competence=0.5)
@@ -86,3 +96,74 @@ class UserSkillCompetenceTests(TestCase):
         user_elo = UserElo.recalculate_for(self.user)
 
         self.assertEqual(user_elo.elo, round((1600 / 29) * 1.5))
+
+    def test_user_domain_elo_averages_skill_competence_in_domain(self):
+        UserSkillCompetence.objects.create(user=self.user, skill=self.skill, competence=0.5)
+        UserSkillCompetence.objects.create(user=self.user, skill=self.other_skill, competence=1.0)
+
+        domain_elo = UserDomainElo.recalculate_for(self.user, self.domain)
+
+        self.assertEqual(domain_elo.competence, 0.75)
+        self.assertEqual(domain_elo.elo, 1200)
+
+
+class ImportQuestionsCommandTests(TestCase):
+    def setUp(self):
+        category = Category.objects.create(name="Math", slug="math")
+        domain = Domain.objects.create(category=category, name="Algebra", slug="algebra")
+        self.skill = Skill.objects.create(
+            domain=domain,
+            name="Linear equations",
+            slug="linear-equations",
+        )
+
+    def write_import_file(self, data):
+        directory = TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = Path(directory.name) / "questions.json"
+        path.write_text(json.dumps(data), encoding="utf-8")
+        return path
+
+    def test_import_questions_creates_question_and_choices(self):
+        path = self.write_import_file(
+            {
+                "questions": [
+                    {
+                        "skill": self.skill.slug,
+                        "prompt": "Solve 2x + 4 = 10.",
+                        "explanation": "Subtract 4, then divide by 2.",
+                        "choices": [
+                            {"text": "2", "is_correct": False},
+                            {"text": "3", "is_correct": True},
+                            {"text": "4", "is_correct": False},
+                            {"text": "5", "is_correct": False},
+                        ],
+                    }
+                ]
+            }
+        )
+
+        call_command("import_questions", path)
+
+        question = Question.objects.get(prompt="Solve 2x + 4 = 10.")
+        self.assertEqual(question.skill, self.skill)
+        self.assertEqual(question.explanation, "Subtract 4, then divide by 2.")
+        self.assertEqual(question.choices.count(), 4)
+        self.assertEqual(question.choices.get(is_correct=True).text, "3")
+
+    def test_import_questions_rejects_questions_without_one_correct_choice(self):
+        path = self.write_import_file(
+            [
+                {
+                    "skill": self.skill.slug,
+                    "prompt": "Pick the correct answer.",
+                    "choices": [
+                        {"text": "A", "is_correct": False},
+                        {"text": "B", "is_correct": False},
+                    ],
+                }
+            ]
+        )
+
+        with self.assertRaises(CommandError):
+            call_command("import_questions", path)

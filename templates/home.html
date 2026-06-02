@@ -33,6 +33,9 @@
                         @
                         {% if request.user.is_authenticated %}
                             {{ request.user.username }}
+                            {% if request.user.is_staff or request.user.is_superuser %}
+                                <span class="admin-badge">Admin</span>
+                            {% endif %}
                         {% else %}
                             username
                         {% endif %}
@@ -69,15 +72,7 @@
         </article>
     </div>
 
-    <section class="dashboard-panel">
-        <div>
-            <p class="eyebrow">More Stats</p>
-            <h2>Performance overview</h2>
-            <p>
-                Work in progress. This section will show graphed score trends and progression.
-            </p>
-        </div>
-    </section>
+    {% include "partials/performance_overview.html" %}
 
 </section>
 {% endblock %}
