@@ -4,7 +4,26 @@ from pathlib import Path
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from grinder.models import AnswerChoice, Question, Skill
+from grinder.models import QUESTION_DIFFICULTY_POINTS, AnswerChoice, Question, Skill
+
+# Example import format:
+
+# {
+#   "questions": [
+#     {
+#       "skill": "linear-equations",
+#       "prompt": "Solve 2x + 4 = 10.",
+#       "explanation": "Subtract 4 from both sides, then divide by 2.",
+#       "difficulty": "easy"
+#       "choices": [
+#         { "text": "2", "is_correct": false },
+#         { "text": "3", "is_correct": true },
+#         { "text": "4", "is_correct": false },
+#         { "text": "5", "is_correct": false }
+#       ]
+#     }
+#   ]
+# }
 
 
 class Command(BaseCommand):
@@ -77,6 +96,7 @@ class Command(BaseCommand):
 
         skill_slug = item.get("skill")
         prompt = item.get("prompt")
+        difficulty = item.get("difficulty", "medium")
         choices = item.get("choices")
 
         if not skill_slug:
@@ -87,6 +107,13 @@ class Command(BaseCommand):
 
         if not isinstance(choices, list) or len(choices) < 2:
             raise CommandError(f'Question #{index} must include at least two "choices".')
+
+        if difficulty not in QUESTION_DIFFICULTY_POINTS:
+            valid_difficulties = ", ".join(QUESTION_DIFFICULTY_POINTS)
+            raise CommandError(
+                f'Question #{index} uses invalid difficulty "{difficulty}". '
+                f"Use one of: {valid_difficulties}."
+            )
 
         try:
             skill = Skill.objects.get(slug=skill_slug)
@@ -106,6 +133,7 @@ class Command(BaseCommand):
             "skill": skill,
             "prompt": prompt,
             "explanation": item.get("explanation", ""),
+            "difficulty": difficulty,
             "is_active": item.get("is_active", True),
             "choices": parsed_choices,
         }
@@ -137,14 +165,16 @@ class Command(BaseCommand):
 
             if question:
                 question.explanation = question_data["explanation"]
+                question.difficulty = question_data["difficulty"]
                 question.is_active = question_data["is_active"]
-                question.save(update_fields=["explanation", "is_active"])
+                question.save(update_fields=["explanation", "difficulty", "is_active"])
                 return question, False
 
         question = Question.objects.create(
             skill=question_data["skill"],
             prompt=question_data["prompt"],
             explanation=question_data["explanation"],
+            difficulty=question_data["difficulty"],
             is_active=question_data["is_active"],
         )
         return question, True

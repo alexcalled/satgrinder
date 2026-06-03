@@ -12,7 +12,166 @@
 {% block content %}
 <section class="terminal-page">
 
-    {% if question %}
+    {% if score_change %}
+        <article class="terminal-card score-summary-card">
+
+            <div class="terminal-header">
+                <p class="eyebrow">Score Update</p>
+                <h1>Rating changed.</h1>
+            </div>
+
+            <div class="score-summary-layout">
+                <div class="score-overall-panel">
+                    <span>ELO</span>
+                    <strong
+                        class="score-count"
+                        data-start="{{ score_change.overall_before }}"
+                        data-end="{{ score_change.overall_after }}"
+                    >
+                        {{ score_change.overall_before }}
+                    </strong>
+                    <em
+                        class="
+                            score-delta
+                            {% if score_change.overall_delta > 0 %}
+                                score-delta-positive
+                            {% elif score_change.overall_delta < 0 %}
+                                score-delta-negative
+                            {% endif %}
+                        "
+                    >
+                        {{ score_change.overall_delta_label }}
+                    </em>
+                </div>
+
+                <div class="score-domain-list">
+                    {% for domain in score_change.domains %}
+                        <div class="score-domain-row">
+                            <div class="score-domain-top">
+                                <span>{{ domain.name }}</span>
+                                <strong
+                                    class="score-count"
+                                    data-start="{{ domain.before }}"
+                                    data-end="{{ domain.after }}"
+                                >
+                                    {{ domain.before }}
+                                </strong>
+                                <em
+                                    class="
+                                        score-delta
+                                        {% if domain.delta > 0 %}
+                                            score-delta-positive
+                                        {% elif domain.delta < 0 %}
+                                            score-delta-negative
+                                        {% endif %}
+                                    "
+                                >
+                                    {{ domain.delta_label }}
+                                </em>
+                            </div>
+
+                            <div class="score-change-bar">
+                                <span
+                                    style="
+                                        --score-fill-start: {{ domain.before_percent }}%;
+                                        --score-fill-end: {{ domain.after_percent }}%;
+                                    "
+                                ></span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <a href="{% url 'grind:terminal' %}" class="terminal-submit-button">
+                Continue
+            </a>
+
+        </article>
+
+        <script>
+            document.querySelectorAll(".score-count").forEach((element) => {
+                const start = Number(element.dataset.start);
+                const end = Number(element.dataset.end);
+                const duration = 800;
+                const startedAt = performance.now();
+
+                function tick(now) {
+                    const progress = Math.min((now - startedAt) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    element.textContent = Math.round(start + (end - start) * eased);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(tick);
+                    }
+                }
+
+                requestAnimationFrame(tick);
+            });
+        </script>
+    {% elif answer_attempt %}
+        <article class="terminal-card answer-result-card">
+
+            <div class="terminal-header">
+                <p class="eyebrow">
+                    {{ question.skill.domain.category.name }}
+                    ·
+                    {{ question.skill.domain.name }}
+                    ·
+                    {{ question.get_difficulty_display }}
+                </p>
+
+                {% if answer_attempt.is_correct %}
+                    <h1>Correct!</h1>
+                {% else %}
+                    <h1>Almost.</h1>
+                {% endif %}
+            </div>
+
+            <div class="question-block">
+                <p>{{ question.prompt|linebreaksbr }}</p>
+            </div>
+
+            <div class="answer-review">
+                <div
+                    class="
+                        answer-review-row
+                        {% if not answer_attempt.is_correct %}
+                            answer-review-row-wrong
+                        {% endif %}
+                    "
+                >
+                    <span>Your answer</span>
+                    <strong>{{ answer_attempt.selected_choice.text }}</strong>
+                </div>
+
+                {% if not answer_attempt.is_correct and correct_choice %}
+                    <div class="answer-review-row answer-review-row-correct">
+                        <span>Correct answer</span>
+                        <strong>{{ correct_choice.text }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="explanation-block">
+                <h2>Explanation</h2>
+
+                {% if question.explanation %}
+                    <p>{{ question.explanation|linebreaksbr }}</p>
+                {% else %}
+                    <p>No explanation has been added for this question yet.</p>
+                {% endif %}
+            </div>
+
+            <a
+                href="{% url 'grind:score_summary' answer_attempt.id %}"
+                class="terminal-submit-button"
+            >
+                Next Question
+            </a>
+
+        </article>
+    {% elif question %}
         <article class="terminal-card">
 
             <div class="terminal-header">
@@ -20,6 +179,8 @@
                     {{ question.skill.domain.category.name }}
                     ·
                     {{ question.skill.domain.name }}
+                    ·
+                    {{ question.get_difficulty_display }}
                 </p>
 
                 <h1>{{ question.skill.name }}</h1>

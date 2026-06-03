@@ -3,7 +3,24 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 SAT_ELO_MAX = 1600
-SAT_SKILL_COUNT = 29
+DOMAIN_ELO_DEFAULT = 100
+DOMAIN_ELO_MAX = 200
+QUESTION_CORRECT_POINTS = {
+    "easy": 5,
+    "medium": 10,
+    "hard": 15,
+}
+QUESTION_INCORRECT_POINTS = {
+    "easy": -15,
+    "medium": -10,
+    "hard": -5,
+}
+QUESTION_DIFFICULTY_POINTS = QUESTION_CORRECT_POINTS
+QUESTION_DIFFICULTY_CHOICES = [
+    ("easy", "Easy"),
+    ("medium", "Medium"),
+    ("hard", "Hard"),
+]
 
 
 class Category(models.Model):
@@ -41,7 +58,20 @@ class Question(models.Model):
     )  # change
     prompt = models.TextField(blank=True)
     explanation = models.TextField(blank=True)
+    difficulty = models.CharField(
+        max_length=10,
+        choices=QUESTION_DIFFICULTY_CHOICES,
+        default="medium",
+    )
     is_active = models.BooleanField(default=True)
+
+    @property
+    def elo_points(self):
+        return QUESTION_CORRECT_POINTS.get(self.difficulty, QUESTION_CORRECT_POINTS["medium"])
+
+    def elo_delta_for_result(self, is_correct):
+        points = QUESTION_CORRECT_POINTS if is_correct else QUESTION_INCORRECT_POINTS
+        return points.get(self.difficulty, points["medium"])
 
     def __str__(self):
         return self.prompt[:50]
@@ -99,10 +129,8 @@ class UserElo(models.Model):
 
     @classmethod
     def recalculate_for(cls, user):
-        competence_total = sum(
-            UserSkillCompetence.objects.filter(user=user).values_list("competence", flat=True)
-        )
-        elo = round((SAT_ELO_MAX / SAT_SKILL_COUNT) * competence_total)
+        domain_elos = UserDomainElo.recalculate_all_for(user)
+        elo = sum(domain_elo.elo for domain_elo in domain_elos)
         elo = max(0, min(SAT_ELO_MAX, elo))
 
         user_elo, _ = cls.objects.update_or_create(
@@ -121,12 +149,12 @@ class UserDomainElo(models.Model):
     )
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name="user_elos")
     competence = models.FloatField(
-        default=0.0,
+        default=0.5,
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
     )
     elo = models.PositiveSmallIntegerField(
-        default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(SAT_ELO_MAX)],
+        default=DOMAIN_ELO_DEFAULT,
+        validators=[MinValueValidator(0), MaxValueValidator(DOMAIN_ELO_MAX)],
     )
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -139,17 +167,25 @@ class UserDomainElo(models.Model):
         ]
 
     @classmethod
-    def recalculate_for(cls, user, domain):
-        skills = domain.skills.filter(is_active=True)
-        skill_count = skills.count()
-        competence_total = sum(
-            UserSkillCompetence.objects.filter(user=user, skill__in=skills).values_list(
-                "competence", flat=True
-            )
+    def score_for(cls, user, domain, exclude_attempt_id=None):
+        attempts = QuestionAttempt.objects.filter(
+            user=user,
+            question__skill__domain=domain,
+        ).select_related("question")
+
+        if exclude_attempt_id:
+            attempts = attempts.exclude(id=exclude_attempt_id)
+
+        elo = DOMAIN_ELO_DEFAULT + sum(
+            attempt.question.elo_delta_for_result(attempt.is_correct) for attempt in attempts
         )
-        competence = competence_total / skill_count if skill_count else 0.0
-        competence = max(0.0, min(1.0, competence))
-        elo = round(SAT_ELO_MAX * competence)
+        return max(0, min(DOMAIN_ELO_MAX, elo))
+
+    @classmethod
+    def recalculate_for(cls, user, domain):
+        elo = cls.score_for(user, domain)
+        elo = max(0, min(DOMAIN_ELO_MAX, elo))
+        competence = elo / DOMAIN_ELO_MAX
 
         user_domain_elo, _ = cls.objects.update_or_create(
             user=user,

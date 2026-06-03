@@ -11,4 +11,6 @@ urlpatterns = [
     path("start/<slug:category_slug>/", views.start_category, name="start_category"),
     path("terminal/", views.terminal, name="terminal"),
     path("answer/<int:question_id>/", views.submit_answer, name="submit_answer"),
+    path("result/<int:attempt_id>/", views.answer_result, name="answer_result"),
+    path("score/<int:attempt_id>/", views.score_summary, name="score_summary"),
 ]

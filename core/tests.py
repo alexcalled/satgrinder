@@ -46,19 +46,19 @@ class HomeDashboardTests(TestCase):
 
         response = self.client.get(reverse("home"))
 
-        self.assertEqual(response.context["elo"], round((1600 / 29) * 0.5))
+        self.assertEqual(response.context["elo"], 200)
         self.assertEqual(response.context["questions_solved"], 2)
         self.assertEqual(response.context["minutes_grinding"], 0)
         self.assertEqual(response.context["current_streak"], 1)
         self.assertEqual(response.context["accuracy_rate"], 50)
         self.assertEqual(response.context["domain_groups"][0]["label"], "Math")
-        self.assertEqual(response.context["domain_groups"][0]["domains"][0]["rating"], 800)
+        self.assertEqual(response.context["domain_groups"][0]["domains"][0]["rating"], 100)
         self.assertEqual(
             response.context["domain_groups"][0]["domains"][0]["competence_percent"], 50
         )
         self.assertEqual(response.context["domain_groups"][1]["label"], "R&W")
-        self.assertEqual(response.context["domain_groups"][1]["domains"][0]["rating"], 0)
-        self.assertContains(response, f"{round((1600 / 29) * 0.5)} ELO")
+        self.assertEqual(response.context["domain_groups"][1]["domains"][0]["rating"], 100)
+        self.assertContains(response, "200 ELO")
         self.assertContains(response, "Algebra")
         self.assertContains(response, "Information and Ideas")
         self.assertContains(response, "2")

@@ -328,6 +328,188 @@
     background: var(--accent-dark);
 }
 
+.score-summary-card {
+    display: grid;
+    gap: 1.35rem;
+}
+
+.score-summary-layout {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.75fr) minmax(0, 1.4fr);
+    gap: 1.35rem;
+    align-items: stretch;
+}
+
+.score-overall-panel {
+    display: grid;
+    align-content: center;
+    gap: 0.45rem;
+    min-height: 260px;
+    padding: 1.35rem;
+    border: 1px solid rgba(59, 115, 95, 0.2);
+    border-radius: var(--radius-md);
+    background: var(--accent-soft);
+}
+
+.score-overall-panel span {
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.score-overall-panel strong {
+    color: var(--text);
+    font-size: 5rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.9;
+}
+
+.score-delta {
+    width: fit-content;
+    padding: 0.32rem 0.55rem;
+    border-radius: 999px;
+    background: white;
+    color: var(--muted);
+    font-style: normal;
+    font-size: 0.86rem;
+    font-weight: 950;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.score-delta-positive {
+    color: var(--accent-dark);
+}
+
+.score-delta-negative {
+    color: #8f2f24;
+}
+
+.score-domain-list {
+    display: grid;
+    align-content: center;
+    gap: 0.8rem;
+    min-width: 0;
+}
+
+.score-domain-row {
+    display: grid;
+    gap: 0.45rem;
+    min-width: 0;
+}
+
+.score-domain-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.score-domain-top span {
+    min-width: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 850;
+    line-height: 1.2;
+}
+
+.score-domain-top strong {
+    color: var(--accent-dark);
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.score-change-bar {
+    height: 0.72rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e6ebe1;
+}
+
+.score-change-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #3b735f, #75c995);
+    animation: score-fill 800ms ease-out both;
+}
+
+@keyframes score-fill {
+    from {
+        width: var(--score-fill-start, 50%);
+    }
+
+    to {
+        width: var(--score-fill-end, 50%);
+    }
+}
+
+.answer-result-card {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.answer-review {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.answer-review-row {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: white;
+}
+
+.answer-review-row-wrong {
+    border-color: rgba(143, 47, 36, 0.24);
+    background: rgba(143, 47, 36, 0.08);
+}
+
+.answer-review-row-correct {
+    border-color: rgba(59, 115, 95, 0.24);
+    background: rgba(59, 115, 95, 0.1);
+}
+
+.answer-review-row span {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.answer-review-row strong {
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.explanation-block {
+    padding: 1.15rem;
+    border: 1px solid rgba(59, 115, 95, 0.2);
+    border-radius: var(--radius-md);
+    background: var(--accent-soft);
+}
+
+.explanation-block h2 {
+    margin: 0;
+    color: var(--accent-dark);
+    font-size: 1.15rem;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.explanation-block p {
+    margin: 0.75rem 0 0;
+    color: var(--text);
+    line-height: 1.7;
+}
+
 .terminal-empty h1 {
     margin: 0;
     font-size: clamp(2.2rem, 7vw, 4.5rem);
@@ -373,5 +555,26 @@
     .terminal-submit-button {
         width: 100%;
         justify-self: stretch;
+    }
+
+    .score-summary-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .score-overall-panel {
+        min-height: 180px;
+    }
+
+    .score-overall-panel strong {
+        font-size: 4rem;
+    }
+
+    .score-domain-top {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .score-domain-top .score-delta {
+        grid-column: 2;
+        justify-self: end;
     }
 }
