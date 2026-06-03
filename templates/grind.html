@@ -83,9 +83,15 @@
                 <p>Build a custom grind session based on topic, difficulty, or weak areas.</p>
             </div>
 
-            <a href="#" class="grind-start-button">
+            <button
+                type="button"
+                class="grind-start-button"
+                hx-get="{% url 'grind:custom_modal' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
+            >
                 Build
-            </a>
+            </button>
         </article>
 
     </div>

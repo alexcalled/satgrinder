@@ -10,6 +10,7 @@ from django.utils import timezone
 from grinder.models import Domain, QuestionAttempt, UserDomainElo, UserElo
 
 
+# Gets initials of user for pfp treating - or _ as space
 def user_initials(user):
     name = user.get_full_name().strip() or user.username
     parts = [part for part in name.replace("-", " ").replace("_", " ").split() if part]
@@ -60,7 +61,7 @@ def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
 
-    # If its a GET request, creates empty creation form. 
+    # If its a GET request, creates empty creation form.
     # Otherwise creates and saves user into database, logs in
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -116,20 +117,17 @@ def home(request):
 
 @login_required
 def leaderboard(request):
+    # orders user elos, keeping top 8
     users = (
         get_user_model()
         .objects.filter(is_active=True, elo_stat__isnull=False)
         .select_related("elo_stat")
         .order_by("-elo_stat__elo", "username")[:8]
     )
-    entries = []
 
+    entries = []
     for rank, user in enumerate(users, start=1):
-        podium_class = {
-            1: "podium-first",
-            2: "podium-second",
-            3: "podium-third",
-        }.get(rank, "")
+        podium_class = {1: "podium-first", 2: "podium-second", 3: "podium-third"}.get(rank, "")
         entries.append(
             {
                 "rank": rank,

@@ -7,6 +7,7 @@ app_name = "grind"
 urlpatterns = [
     path("", views.category_select, name="category_select"),
     path("modal/close/", views.close_modal, name="close_modal"),
+    path("modal/custom/", views.custom_modal, name="custom_modal"),
     path("modal/<slug:category_slug>/", views.category_modal, name="category_modal"),
     path("start/<slug:category_slug>/", views.start_category, name="start_category"),
     path("terminal/", views.terminal, name="terminal"),

@@ -235,4 +235,43 @@
     {% endif %}
 
 </section>
+
+{% if question %}
+    <button
+        type="button"
+        class="reference-launcher"
+        data-reference-open
+        aria-controls="reference-panel"
+        aria-expanded="false"
+        title="Open reference"
+    >
+        Ref
+    </button>
+
+    <section
+        id="reference-panel"
+        class="reference-panel"
+        data-reference-panel
+        aria-label="SAT reference"
+        hidden
+    >
+        <header class="reference-panel-bar" data-reference-drag>
+            <button
+                type="button"
+                class="reference-panel-close"
+                data-reference-close
+                aria-label="Close reference"
+            ></button>
+            <span class="reference-panel-dot"></span>
+            <span class="reference-panel-dot"></span>
+            <strong>SAT Reference</strong>
+        </header>
+
+        <div class="reference-panel-body">
+            <img src="{% static 'reference.png' %}" alt="SAT math reference sheet">
+        </div>
+    </section>
+
+    <script src="{% static 'js/reference_panel.js' %}" defer></script>
+{% endif %}
 {% endblock %}

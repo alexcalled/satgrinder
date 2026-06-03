@@ -99,6 +99,7 @@ def build_score_change(user, attempt):
     }
 
 
+# Selects question, probability of selection weighted by competence
 def select_weighted_question(user, selected_skill_ids):
     attempted_question_ids = QuestionAttempt.objects.filter(
         user=user,
@@ -152,6 +153,11 @@ def category_modal(request, category_slug):
 
 
 @login_required
+def custom_modal(request):
+    return render(request, "partials/custom_wip_modal.html")
+
+
+@login_required
 @require_POST
 def start_category(request, category_slug):
     category = get_object_or_404(
@@ -186,15 +192,10 @@ def terminal(request):
 
     question = select_weighted_question(request.user, selected_skill_ids)
 
-    return render(
-        request,
-        "terminal.html",
-        {
-            "question": question,
-        },
-    )
+    return render(request, "terminal.html", {"question": question})
 
 
+# Gets question, choice to make QuestionAttempt. Recalculates all user stats.
 @login_required
 @require_POST
 def submit_answer(request, question_id):
@@ -233,6 +234,7 @@ def submit_answer(request, question_id):
     return redirect("grind:answer_result", attempt_id=attempt.id)
 
 
+# Creates answer review page after submission.
 @login_required
 def answer_result(request, attempt_id):
     attempt = get_object_or_404(
@@ -264,6 +266,7 @@ def answer_result(request, attempt_id):
     )
 
 
+# Finds change in score for elo change screen after question review
 @login_required
 def score_summary(request, attempt_id):
     attempt = get_object_or_404(
@@ -281,13 +284,7 @@ def score_summary(request, attempt_id):
         attempt,
     )
 
-    return render(
-        request,
-        "terminal.html",
-        {
-            "score_change": score_change,
-        },
-    )
+    return render(request, "terminal.html", {"score_change": score_change})
 
 
 @login_required
