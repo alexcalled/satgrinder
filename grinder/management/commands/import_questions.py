@@ -25,6 +25,37 @@ from grinder.models import QUESTION_DIFFICULTY_POINTS, AnswerChoice, Question, S
 #   ]
 # }
 
+# skills:
+# equivalent-expressions
+# nonlinear-equations-in-one-variable-and-systems-of
+# nonlinear-functions
+# linear-equations-in-one-variable
+# linear-equations-in-two-variables
+# linear-functions
+# linear-inequalities-in-one-or-two-variables
+# systems-of-two-linear-equations-in-two-variables
+# area-and-volume
+# circles
+# lines-angles-and-triangles
+# right-triangles-and-trigonometry
+# evaluating-statistical-claims-observational-studie
+# inference-from-sample-statistics-and-margin-of-err
+# one-variable-data-distributions-and-measures-of-ce
+# percentages
+# probability-and-conditional-probability
+# ratios-rates-proportional-relationships-and-units
+# two-variable-data-models-and-scatterplots
+# cross-text-connections
+# text-structure-and-purpose
+# words-in-context
+# central-ideas-and-details
+# command-of-evidence
+# inferences
+# rhetorical-synthesis
+# transitions
+# boundaries
+# form-structure-and-sense
+
 
 class Command(BaseCommand):
     help = "Import questions and answer choices from a JSON file."

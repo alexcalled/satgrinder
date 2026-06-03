@@ -1,8 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Leaderboard | SAT Grinder{% endblock %}
 
 {% block nav_leaderboard %}active{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+{% endblock %}
 
 {% block content %}
 <section class="leaderboard-page">
@@ -11,38 +16,27 @@
             <p class="eyebrow">Leaderboard</p>
             <h1>Top grinders.</h1>
         </div>
-
-        <div class="leaderboard-season">
-            <span>Weekly Scores</span>
-            <strong>June 1-7</strong>
-        </div>
     </div>
 
+    {% if leaderboard.podium %}
     <section class="podium-grid" aria-label="Top three students">
-        <article class="podium-card podium-second">
-            <span class="podium-rank">2</span>
-            <div class="podium-avatar">MZ</div>
-            <h2>Marcus Z.</h2>
-            <p>1550 ELO</p>
-            <strong>+112</strong>
-        </article>
-
-        <article class="podium-card podium-first">
-            <span class="podium-rank">1</span>
-            <div class="podium-avatar">YZ</div>
-            <h2>中文名称</h2>
-            <p>1600 ELO</p>
-            <strong>+146</strong>
-        </article>
-
-        <article class="podium-card podium-third">
-            <span class="podium-rank">3</span>
-            <div class="podium-avatar">ND</div>
-            <h2>Nick D.</h2>
-            <p>1520 ELO</p>
-            <strong>+97</strong>
-        </article>
+        {% for entry in leaderboard.podium %}
+            <article
+                class="podium-card {{ entry.podium_class }}{% if entry.is_current_user %} leaderboard-current{% endif %}"
+            >
+                <span class="podium-rank">{{ entry.rank }}</span>
+                <div class="podium-avatar">{{ entry.initials }}</div>
+                <h2>
+                    @{{ entry.username }}
+                    {% if entry.is_admin %}
+                        <span class="leaderboard-admin-badge">Admin</span>
+                    {% endif %}
+                </h2>
+                <p>{{ entry.elo }} ELO</p>
+            </article>
+        {% endfor %}
     </section>
+    {% endif %}
 
     <section class="leaderboard-table-card" aria-labelledby="leaderboard-table-heading">
         <div class="leaderboard-table-header">
@@ -51,44 +45,28 @@
                 <h2 id="leaderboard-table-heading">Class ranking</h2>
             </div>
 
-            <span>Static preview</span>
+            <span>Live ELO</span>
         </div>
 
         <div class="leaderboard-list">
-            <div class="leaderboard-row">
-                <span class="leaderboard-place">4</span>
-                <span class="leaderboard-player">Lucas C.</span>
-                <span class="leaderboard-pill">+15</span>
-                <strong>1480</strong>
-            </div>
-
-            <div class="leaderboard-row">
-                <span class="leaderboard-place">5</span>
-                <span class="leaderboard-player">Travis S.</span>
-                <span class="leaderboard-pill">+80</span>
-                <strong>1460</strong>
-            </div>
-
-            <div class="leaderboard-row">
-                <span class="leaderboard-place">6</span>
-                <span class="leaderboard-player">Andy G.</span>
-                <span class="leaderboard-pill">-20</span>
-                <strong>1390</strong>
-            </div>
-
-            <div class="leaderboard-row">
-                <span class="leaderboard-place">7</span>
-                <span class="leaderboard-player">Benjamin S.</span>
-                <span class="leaderboard-pill">+40</span>
-                <strong>1330</strong>
-            </div>
-
-            <div class="leaderboard-row">
-                <span class="leaderboard-place">8</span>
-                <span class="leaderboard-player">Prajeet N.</span>
-                <span class="leaderboard-pill">+0</span>
-                <strong>1295</strong>
-            </div>
+            {% for entry in leaderboard.rows %}
+                <div
+                    class="leaderboard-row{% if entry.is_current_user %} leaderboard-current{% endif %}"
+                >
+                    <span class="leaderboard-place">{{ entry.rank }}</span>
+                    <span class="leaderboard-player">
+                        @{{ entry.username }}
+                        {% if entry.is_admin %}
+                            <span class="leaderboard-admin-badge">Admin</span>
+                        {% endif %}
+                    </span>
+                    <strong>{{ entry.elo }}</strong>
+                </div>
+            {% empty %}
+                {% if not leaderboard.entries %}
+                    <p class="leaderboard-empty">No ELO scores yet.</p>
+                {% endif %}
+            {% endfor %}
         </div>
     </section>
 </section>

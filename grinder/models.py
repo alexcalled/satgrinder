@@ -23,6 +23,7 @@ QUESTION_DIFFICULTY_CHOICES = [
 ]
 
 
+# SAT category, highest classification tier
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -32,6 +33,7 @@ class Category(models.Model):
         return self.name
 
 
+# SAT domain, second classification tier
 class Domain(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="domains")
     name = models.CharField(max_length=100)
@@ -42,6 +44,7 @@ class Domain(models.Model):
         return f"{self.category} —— {self.name}"
 
 
+# SAT skill, third classification tier
 class Skill(models.Model):
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name="skills")
     name = models.CharField(max_length=100)
@@ -55,22 +58,22 @@ class Skill(models.Model):
 class Question(models.Model):
     skill = models.ForeignKey(
         Skill, on_delete=models.CASCADE, related_name="questions", null=True, blank=True
-    )  # change
+    )
     prompt = models.TextField(blank=True)
     explanation = models.TextField(blank=True)
-    difficulty = models.CharField(
-        max_length=10,
-        choices=QUESTION_DIFFICULTY_CHOICES,
-        default="medium",
-    )
+    difficulty = models.CharField(choices=QUESTION_DIFFICULTY_CHOICES, default="medium")
     is_active = models.BooleanField(default=True)
 
+    # Logic for elo gained/lost by question
     @property
     def elo_points(self):
         return QUESTION_CORRECT_POINTS.get(self.difficulty, QUESTION_CORRECT_POINTS["medium"])
 
     def elo_delta_for_result(self, is_correct):
-        points = QUESTION_CORRECT_POINTS if is_correct else QUESTION_INCORRECT_POINTS
+        if is_correct:
+            points = QUESTION_CORRECT_POINTS
+        else:
+            points = QUESTION_INCORRECT_POINTS
         return points.get(self.difficulty, points["medium"])
 
     def __str__(self):
@@ -83,33 +86,23 @@ class UserSkillCompetence(models.Model):
     )
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name="user_competences")
     competence = models.FloatField(
-        default=0.0,
-        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+        default=0.0, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["user", "skill"],
-                name="unique_competence_per_user_skill",
-            )
-        ]
-
+    # Calculates competence as correct rate for its skill, updates
     @classmethod
     def recalculate_for(cls, user, skill):
         attempts = QuestionAttempt.objects.filter(user=user, question__skill=skill)
         attempt_count = attempts.count()
         competence = 0.0
 
-        if attempt_count:
+        if attempt_count > 0:
             correct_count = attempts.filter(is_correct=True).count()
             competence = correct_count / attempt_count
 
         user_skill_competence, _ = cls.objects.update_or_create(
-            user=user,
-            skill=skill,
-            defaults={"competence": competence},
+            user=user, skill=skill, defaults={"competence": competence}
         )
         return user_skill_competence
 
@@ -121,9 +114,8 @@ class UserElo(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="elo_stat"
     )
-    elo = models.PositiveSmallIntegerField(
-        default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(SAT_ELO_MAX)],
+    elo = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(SAT_ELO_MAX)]
     )
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -133,10 +125,7 @@ class UserElo(models.Model):
         elo = sum(domain_elo.elo for domain_elo in domain_elos)
         elo = max(0, min(SAT_ELO_MAX, elo))
 
-        user_elo, _ = cls.objects.update_or_create(
-            user=user,
-            defaults={"elo": elo},
-        )
+        user_elo, _ = cls.objects.update_or_create(user=user, defaults={"elo": elo})
         return user_elo
 
     def __str__(self):
@@ -149,28 +138,18 @@ class UserDomainElo(models.Model):
     )
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name="user_elos")
     competence = models.FloatField(
-        default=0.5,
-        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+        default=0.5, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )
-    elo = models.PositiveSmallIntegerField(
+    elo = models.IntegerField(
         default=DOMAIN_ELO_DEFAULT,
         validators=[MinValueValidator(0), MaxValueValidator(DOMAIN_ELO_MAX)],
     )
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["user", "domain"],
-                name="unique_domain_elo_per_user_domain",
-            )
-        ]
-
     @classmethod
     def score_for(cls, user, domain, exclude_attempt_id=None):
         attempts = QuestionAttempt.objects.filter(
-            user=user,
-            question__skill__domain=domain,
+            user=user, question__skill__domain=domain
         ).select_related("question")
 
         if exclude_attempt_id:
@@ -184,16 +163,9 @@ class UserDomainElo(models.Model):
     @classmethod
     def recalculate_for(cls, user, domain):
         elo = cls.score_for(user, domain)
-        elo = max(0, min(DOMAIN_ELO_MAX, elo))
         competence = elo / DOMAIN_ELO_MAX
-
         user_domain_elo, _ = cls.objects.update_or_create(
-            user=user,
-            domain=domain,
-            defaults={
-                "competence": competence,
-                "elo": elo,
-            },
+            user=user, domain=domain, defaults={"competence": competence, "elo": elo}
         )
         return user_domain_elo
 
@@ -218,12 +190,12 @@ class AnswerChoice(models.Model):
 class QuestionAttempt(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="question_attempts"
-    )  # check
+    )
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="attempts")
     selected_choice = models.ForeignKey(
         AnswerChoice, on_delete=models.CASCADE, related_name="attempts"
     )
-    is_correct = models.BooleanField(default=True)  # change this
+    is_correct = models.BooleanField(default=True)
     time_attempted = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):

@@ -22,7 +22,7 @@ SECRET_KEY = env("SECRET_KEY", default="dev-only-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["satgrinder.com", "://satgrinder.com", "127.0.0.1", "10.0.0.243"]
 
 
 # Application definition

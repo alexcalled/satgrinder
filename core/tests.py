@@ -9,6 +9,7 @@ from grinder.models import (
     Question,
     QuestionAttempt,
     Skill,
+    UserElo,
     UserSkillCompetence,
 )
 
@@ -76,12 +77,30 @@ class HomeDashboardTests(TestCase):
 
         self.assertContains(response, '<span class="admin-badge">Admin</span>')
 
-    def test_leaderboard_renders_static_preview(self):
-        user = get_user_model().objects.create_user(username="student", password="test-password")
-        self.client.force_login(user)
+    def test_leaderboard_renders_top_8_real_elos(self):
+        users = [
+            get_user_model().objects.create_user(
+                username=f"student{i}",
+                password="test-password",
+            )
+            for i in range(10)
+        ]
+        for index, user in enumerate(users):
+            UserElo.objects.create(user=user, elo=1000 + (index * 10))
+        self.client.force_login(users[0])
 
         response = self.client.get(reverse("leaderboard"))
 
+        leaderboard = response.context["leaderboard"]
+        self.assertEqual(len(leaderboard["entries"]), 8)
+        self.assertEqual(leaderboard["entries"][0]["username"], "student9")
+        self.assertEqual(leaderboard["entries"][0]["elo"], 1090)
+        self.assertEqual(leaderboard["entries"][-1]["username"], "student2")
         self.assertContains(response, "Top grinders.")
-        self.assertContains(response, "1600 ELO")
-        self.assertContains(response, "Static preview")
+        self.assertContains(response, "@student9")
+        self.assertContains(response, "1090 ELO")
+        self.assertContains(response, "Live ELO")
+        self.assertNotContains(response, "@student1")
+        self.assertNotContains(response, "@student0")
+        self.assertNotContains(response, "Weekly Scores")
+        self.assertNotContains(response, "Static preview")
