@@ -22,7 +22,24 @@ SECRET_KEY = env("SECRET_KEY", default="dev-only-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["satgrinder.com", "://satgrinder.com", "127.0.0.1", "10.0.0.243"]
+DEFAULT_ALLOWED_HOSTS = [
+    "satgrinder.com",
+    "www.satgrinder.com",
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+    "10.0.0.243",
+    "172.16.36.228",
+    "testserver",
+]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=DEFAULT_ALLOWED_HOSTS)
+CSRF_TRUSTED_ORIGINS = env.list(
+    "CSRF_TRUSTED_ORIGINS",
+    default=[
+        "https://satgrinder.com",
+        "https://www.satgrinder.com",
+    ],
+)
 
 
 # Application definition

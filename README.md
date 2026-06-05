@@ -181,6 +181,47 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+## Connecting `satgrinder.com`
+
+The Django app is ready to serve both `satgrinder.com` and
+`www.satgrinder.com`. In production, set:
+
+```env
+DEBUG=False
+ALLOWED_HOSTS=satgrinder.com,www.satgrinder.com
+CSRF_TRUSTED_ORIGINS=https://satgrinder.com,https://www.satgrinder.com
+```
+
+Deploy the app to a public host first. In that host's domain settings, add both:
+
+```text
+satgrinder.com
+www.satgrinder.com
+```
+
+Then update DNS in Squarespace:
+
+1. Open the Squarespace domains dashboard.
+2. Select `satgrinder.com`.
+3. Open DNS / DNS Settings.
+4. If Squarespace Defaults are present and this Django app is hosted somewhere
+   else, remove the Squarespace Defaults.
+5. Add the DNS records your app host provides.
+
+Typical records look like:
+
+```text
+Host  Type   Value
+@     A      <your app host IP address>
+www   CNAME  <your app host CNAME target>
+```
+
+If your app host only gives you a CNAME target and no root-domain IP address,
+point `www` with the CNAME, then add a Squarespace domain forwarding rule from
+`satgrinder.com` to `https://www.satgrinder.com`.
+
+DNS changes can take 24 to 48 hours to fully propagate.
+
 ## Troubleshooting
 
 ### `DATABASE_URL` is missing
