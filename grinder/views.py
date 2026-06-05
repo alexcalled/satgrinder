@@ -140,7 +140,6 @@ def category_select(request):
 @login_required
 def category_modal(request, category_slug):
 
-
     return render(
         request,
         "partials/grind_modal.html",
@@ -249,7 +248,7 @@ def answer_result(request, attempt_id):
     )
     selected_skill_ids = request.session.get("selected_skill_ids", [])
 
-    #prevents accessing attempt from other user
+    # prevents accessing attempt from other user
     if selected_skill_ids and attempt.question.skill_id not in selected_skill_ids:
         raise Http404("Attempt does not belong to this grind session.")
 
