@@ -1,0 +1,26 @@
+databases:
+  - name: satgrinder-db
+    databaseName: satgrinder
+    user: satgrinder
+
+services:
+  - type: web
+    name: satgrinder
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: satgrinder-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: satgrinder.com,www.satgrinder.com,satgrinder.onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://satgrinder.com,https://www.satgrinder.com,https://satgrinder.onrender.com

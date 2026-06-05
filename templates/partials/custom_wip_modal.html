@@ -1,0 +1,39 @@
+<div class="modal-backdrop">
+    <section class="grind-modal" role="dialog" aria-modal="true" aria-labelledby="custom-wip-title">
+
+        <button
+            type="button"
+            class="modal-close-button"
+            aria-label="Close modal"
+            hx-get="{% url 'grind:close_modal' %}"
+            hx-target="#modal-root"
+            hx-swap="innerHTML"
+        >
+            ×
+        </button>
+
+        <p class="eyebrow">Custom Grind</p>
+
+        <h2 id="custom-wip-title">
+            Work in progress.
+        </h2>
+
+        <p>
+            Custom sessions are not ready yet. For now, choose Reading, Writing, or Math
+            to start a focused grind.
+        </p>
+
+        <div class="modal-actions">
+            <button
+                type="button"
+                class="modal-continue-button"
+                hx-get="{% url 'grind:close_modal' %}"
+                hx-target="#modal-root"
+                hx-swap="innerHTML"
+            >
+                Got it
+            </button>
+        </div>
+
+    </section>
+</div>

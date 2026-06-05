@@ -184,20 +184,36 @@ python manage.py migrate
 ## Connecting `satgrinder.com`
 
 The Django app is ready to serve both `satgrinder.com` and
-`www.satgrinder.com`. In production, set:
+`www.satgrinder.com`. The repo includes Render deployment files:
+
+- `render.yaml` for a Render web service and Postgres database.
+- `build.sh` to install dependencies, collect static files, and run migrations.
+- `Procfile` with the Gunicorn start command.
+- `.python-version` set to Python 3.13.5.
+
+In production, set:
 
 ```env
 DEBUG=False
-ALLOWED_HOSTS=satgrinder.com,www.satgrinder.com
-CSRF_TRUSTED_ORIGINS=https://satgrinder.com,https://www.satgrinder.com
+ALLOWED_HOSTS=satgrinder.com,www.satgrinder.com,<your-render-url>.onrender.com
+CSRF_TRUSTED_ORIGINS=https://satgrinder.com,https://www.satgrinder.com,https://<your-render-url>.onrender.com
 ```
 
-Deploy the app to a public host first. In that host's domain settings, add both:
+To deploy on Render:
+
+1. Push this repo to GitHub.
+2. In Render, create a new Blueprint from this repo, or create a Web Service and
+   PostgreSQL database manually.
+3. Use `./build.sh` as the build command.
+4. Use `gunicorn config.wsgi:application` as the start command.
+5. Add these custom domains to the Render web service:
 
 ```text
 satgrinder.com
 www.satgrinder.com
 ```
+
+Render will show the DNS records to add for each domain.
 
 Then update DNS in Squarespace:
 
