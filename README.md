@@ -3,11 +3,38 @@
 SAT Grinder is a Django web app for SAT practice, skill tracking, domain ELO,
 and grind-mode question sessions.
 
+The live project is hosted at [satgrinder.com](satgrinder.com).
+
+## Why SAT Grinder
+
+SAT Grinder helps students focus their limited study time on the skills that
+need the most work. It turns individual question results into clear skill,
+domain, and overall progress instead of treating every practice session alike.
+
+## Features
+
+- Adaptive Reading, Writing, and Math practice sessions.
+- Skill competence tracking and domain-based ELO ratings.
+- Immediate answer feedback with explanations and score-change summaries.
+- Profile statistics, domain breakdowns, and a live top-eight leaderboard.
+- Question importing, admin tools, and an in-session SAT reference panel.
+
+## Learning Techniques
+
+- **Targeted practice:** Weaker skills are more likely to appear in a session.
+- **Instant feedback:** Answers are reviewed before the student moves on.
+- **Error correction:** Incorrect responses show the correct answer and explanation.
+- **Progress visibility:** Skill competence and ELO changes make improvement measurable.
+- **Repeated retrieval:** Grinding reinforces knowledge through active question solving.
+
 ## Requirements
 
 - Python 3.13
 - Docker and Docker Compose
 - Git
+
+
+# Installation
 
 ## 1. Clone the Project
 
@@ -53,7 +80,7 @@ The project includes a Postgres service in `docker-compose.yml`.
 docker compose up -d db
 ```
 
-Check that it is running:
+To check that it is running:
 
 ```bash
 docker compose ps
@@ -65,15 +92,7 @@ docker compose ps
 python manage.py migrate
 ```
 
-## 6. Create an Admin User
-
-```bash
-python manage.py createsuperuser
-```
-
-Follow the prompts. This account can log in to the app and the Django admin.
-
-## 7. Run the App
+## 6. Run the App
 
 ```bash
 python manage.py runserver
@@ -91,7 +110,22 @@ Admin site:
 http://127.0.0.1:8000/admin
 ```
 
-## 8. Import Questions
+
+# Additional
+
+## Create Admin Account
+
+```bash
+python manage.py createsuperuser
+```
+
+Admin site:
+
+```text
+http://127.0.0.1:8000/admin
+```
+
+## Import Questions
 
 Questions can be imported from JSON with:
 
@@ -181,64 +215,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-## Connecting `satgrinder.com`
-
-The Django app is ready to serve both `satgrinder.com` and
-`www.satgrinder.com`. The repo includes Render deployment files:
-
-- `render.yaml` for a Render web service and Postgres database.
-- `build.sh` to install dependencies, collect static files, and run migrations.
-- `Procfile` with the Gunicorn start command.
-- `.python-version` set to Python 3.13.5.
-
-In production, set:
-
-```env
-DEBUG=False
-ALLOWED_HOSTS=satgrinder.com,www.satgrinder.com,<your-render-url>.onrender.com
-CSRF_TRUSTED_ORIGINS=https://satgrinder.com,https://www.satgrinder.com,https://<your-render-url>.onrender.com
-```
-
-To deploy on Render:
-
-1. Push this repo to GitHub.
-2. In Render, create a new Blueprint from this repo, or create a Web Service and
-   PostgreSQL database manually.
-3. Use `./build.sh` as the build command.
-4. Use `gunicorn config.wsgi:application` as the start command.
-5. Add these custom domains to the Render web service:
-
-```text
-satgrinder.com
-www.satgrinder.com
-```
-
-Render will show the DNS records to add for each domain.
-
-Then update DNS in Squarespace:
-
-1. Open the Squarespace domains dashboard.
-2. Select `satgrinder.com`.
-3. Open DNS / DNS Settings.
-4. If Squarespace Defaults are present and this Django app is hosted somewhere
-   else, remove the Squarespace Defaults.
-5. Add the DNS records your app host provides.
-
-Typical records look like:
-
-```text
-Host  Type   Value
-@     A      <your app host IP address>
-www   CNAME  <your app host CNAME target>
-```
-
-If your app host only gives you a CNAME target and no root-domain IP address,
-point `www` with the CNAME, then add a Squarespace domain forwarding rule from
-`satgrinder.com` to `https://www.satgrinder.com`.
-
-DNS changes can take 24 to 48 hours to fully propagate.
-
-## Troubleshooting
+## Common Issues
 
 ### `DATABASE_URL` is missing
 
@@ -278,13 +255,3 @@ python manage.py runserver 127.0.0.1:8001
 ### Static files look stale
 
 Restart the development server and refresh the browser.
-
-## Project Structure
-
-```text
-config/       Django project settings and URL configuration
-core/         Landing, auth, profile, and leaderboard views
-grinder/      SAT categories, domains, skills, questions, attempts, and scoring
-templates/    Django templates
-static/       CSS and static assets
-```
