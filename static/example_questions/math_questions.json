@@ -1,0 +1,1828 @@
+{
+  "questions": [
+    {
+      "skill": "equivalent-expressions",
+      "prompt": "Which expression is equivalent to 3(2x - 5) - 4(x + 1)?",
+      "explanation": "Distribute to get 6x - 15 - 4x - 4. Combine like terms: 2x - 19.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "2x - 19",
+          "is_correct": true
+        },
+        {
+          "text": "10x - 11",
+          "is_correct": false
+        },
+        {
+          "text": "2x - 11",
+          "is_correct": false
+        },
+        {
+          "text": "10x - 19",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "equivalent-expressions",
+      "prompt": "For x != 3, which expression is equivalent to (x^2 - 9)/(x - 3)?",
+      "explanation": "Factor the numerator: x^2 - 9 = (x - 3)(x + 3). Cancel x - 3 to get x + 3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "x - 3",
+          "is_correct": false
+        },
+        {
+          "text": "x + 3",
+          "is_correct": true
+        },
+        {
+          "text": "x^2 + 3",
+          "is_correct": false
+        },
+        {
+          "text": "1/(x + 3)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "equivalent-expressions",
+      "prompt": "Which expression is equivalent to 2a^2b - 5ab^2 + 3ab^2 - a^2b?",
+      "explanation": "Combine like terms: 2a^2b - a^2b = a^2b and -5ab^2 + 3ab^2 = -2ab^2.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "a^2b - 2ab^2",
+          "is_correct": true
+        },
+        {
+          "text": "3a^2b - 8ab^2",
+          "is_correct": false
+        },
+        {
+          "text": "ab^2 - 2a^2b",
+          "is_correct": false
+        },
+        {
+          "text": "a^2b + 2ab^2",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "equivalent-expressions",
+      "prompt": "Which expression is equivalent to 4(3y + 2) - 2(5 - y)?",
+      "explanation": "Distribute to get 12y + 8 - 10 + 2y. Combine like terms: 14y - 2.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "10y - 2",
+          "is_correct": false
+        },
+        {
+          "text": "14y - 2",
+          "is_correct": true
+        },
+        {
+          "text": "14y + 18",
+          "is_correct": false
+        },
+        {
+          "text": "10y + 18",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-equations-in-one-variable-and-systems-of",
+      "prompt": "What is the larger solution of x^2 - 5x + 6 = 0?",
+      "explanation": "Factor the quadratic: x^2 - 5x + 6 = (x - 2)(x - 3). The solutions are 2 and 3, so the larger solution is 3.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "1",
+          "is_correct": false
+        },
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-equations-in-one-variable-and-systems-of",
+      "prompt": "What is the solution of sqrt(x + 7) = x - 1?",
+      "explanation": "Square both sides: x + 7 = (x - 1)^2 = x^2 - 2x + 1. This gives x^2 - 3x - 6 = 0, so x = (3 +/- sqrt(33))/2. Since x - 1 must be nonnegative, the solution is (3 + sqrt(33))/2.",
+      "difficulty": "hard",
+      "choices": [
+        {
+          "text": "(3 - sqrt(33))/2",
+          "is_correct": false
+        },
+        {
+          "text": "(3 + sqrt(33))/2",
+          "is_correct": true
+        },
+        {
+          "text": "3",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-equations-in-one-variable-and-systems-of",
+      "prompt": "The system y = x^2 and y = 2x + 3 has which solutions?",
+      "explanation": "Set the equations equal: x^2 = 2x + 3, so x^2 - 2x - 3 = 0. Factoring gives (x - 3)(x + 1) = 0, so x = 3 or x = -1. The corresponding points are (3, 9) and (-1, 1).",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "(1, -1) and (9, 3)",
+          "is_correct": false
+        },
+        {
+          "text": "(-1, 1) and (3, 9)",
+          "is_correct": true
+        },
+        {
+          "text": "(-3, 9) and (1, 1)",
+          "is_correct": false
+        },
+        {
+          "text": "No real solutions",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-equations-in-one-variable-and-systems-of",
+      "prompt": "If (x - 4)^2 = 25, what is the sum of all possible values of x?",
+      "explanation": "Take square roots: x - 4 = 5 or x - 4 = -5. Thus x = 9 or x = -1, and the sum is 8.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "-8",
+          "is_correct": false
+        },
+        {
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "text": "8",
+          "is_correct": true
+        },
+        {
+          "text": "10",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-functions",
+      "prompt": "For f(x) = x^2 - 4x + 7, what is the minimum value of f(x)?",
+      "explanation": "Complete the square: x^2 - 4x + 7 = (x - 2)^2 + 3. The minimum occurs when (x - 2)^2 = 0, so the minimum value is 3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "text": "7",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-functions",
+      "prompt": "If g(x) = 2^x, what is g(3)/g(1)?",
+      "explanation": "g(3) = 2^3 = 8 and g(1) = 2. The ratio is 8/2 = 4.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "4",
+          "is_correct": true
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        },
+        {
+          "text": "8",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-functions",
+      "prompt": "The function h is defined by h(x) = (x - 1)(x + 5). Which values of x make h(x) = 0?",
+      "explanation": "By the zero product property, x - 1 = 0 or x + 5 = 0. Thus x = 1 or x = -5.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "-5 and 1",
+          "is_correct": true
+        },
+        {
+          "text": "-1 and 5",
+          "is_correct": false
+        },
+        {
+          "text": "1 and 5",
+          "is_correct": false
+        },
+        {
+          "text": "-5 and -1",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "nonlinear-functions",
+      "prompt": "The function f(x) = -(x - 2)^2 + 9 has a maximum value of which of the following?",
+      "explanation": "Because -(x - 2)^2 is always less than or equal to 0, the maximum occurs when x = 2. The maximum value is 9.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "7",
+          "is_correct": false
+        },
+        {
+          "text": "9",
+          "is_correct": true
+        },
+        {
+          "text": "11",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-one-variable",
+      "prompt": "Solve for x: 5x - 7 = 3x + 11.",
+      "explanation": "Subtract 3x from both sides to get 2x - 7 = 11. Add 7 to get 2x = 18, so x = 9.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "7",
+          "is_correct": false
+        },
+        {
+          "text": "8",
+          "is_correct": false
+        },
+        {
+          "text": "9",
+          "is_correct": true
+        },
+        {
+          "text": "10",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-one-variable",
+      "prompt": "Solve for x: x/3 - 4 = 2.",
+      "explanation": "Add 4 to both sides to get x/3 = 6. Multiply by 3 to get x = 18.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "6",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        },
+        {
+          "text": "18",
+          "is_correct": true
+        },
+        {
+          "text": "24",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-one-variable",
+      "prompt": "Solve for x: 2(3x - 1) = 4x + 10.",
+      "explanation": "Distribute: 6x - 2 = 4x + 10. Subtract 4x and add 2 to get 2x = 12, so x = 6.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": true
+        },
+        {
+          "text": "8",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-one-variable",
+      "prompt": "Solve for x: 0.25x + 6 = 18.",
+      "explanation": "Subtract 6 from both sides to get 0.25x = 12. Divide by 0.25 to get x = 48.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "24",
+          "is_correct": false
+        },
+        {
+          "text": "36",
+          "is_correct": false
+        },
+        {
+          "text": "48",
+          "is_correct": true
+        },
+        {
+          "text": "72",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-two-variables",
+      "prompt": "In the equation 3x + 2y = 18, what is y when x = 4?",
+      "explanation": "Substitute x = 4: 3(4) + 2y = 18, so 12 + 2y = 18. Then 2y = 6 and y = 3.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-two-variables",
+      "prompt": "What is the slope of the line given by 2y - 6x = 8?",
+      "explanation": "Rewrite in slope-intercept form: 2y = 6x + 8, so y = 3x + 4. The slope is 3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-two-variables",
+      "prompt": "Which ordered pair lies on the line x - 2y = 7?",
+      "explanation": "Substitute each pair into x - 2y = 7. For (9, 1), 9 - 2(1) = 7, so it lies on the line.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "(5, 1)",
+          "is_correct": false
+        },
+        {
+          "text": "(9, 1)",
+          "is_correct": true
+        },
+        {
+          "text": "(7, 2)",
+          "is_correct": false
+        },
+        {
+          "text": "(3, -1)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-equations-in-two-variables",
+      "prompt": "Which equation represents the line through (0, 5) and (2, 1)?",
+      "explanation": "The slope is (1 - 5)/(2 - 0) = -4/2 = -2. Since the y-intercept is 5, the equation is y = -2x + 5.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "y = 2x + 5",
+          "is_correct": false
+        },
+        {
+          "text": "y = -2x + 5",
+          "is_correct": true
+        },
+        {
+          "text": "y = -2x - 5",
+          "is_correct": false
+        },
+        {
+          "text": "y = 5x - 2",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-functions",
+      "prompt": "If f(x) = 3x - 2, what is f(5)?",
+      "explanation": "Substitute x = 5: f(5) = 3(5) - 2 = 13.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "text": "13",
+          "is_correct": true
+        },
+        {
+          "text": "15",
+          "is_correct": false
+        },
+        {
+          "text": "17",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-functions",
+      "prompt": "A linear function has slope -4 and y-intercept 7. Which equation defines the function?",
+      "explanation": "A linear function with slope m and y-intercept b has form f(x) = mx + b. Here m = -4 and b = 7.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "f(x) = 4x + 7",
+          "is_correct": false
+        },
+        {
+          "text": "f(x) = -4x + 7",
+          "is_correct": true
+        },
+        {
+          "text": "f(x) = 7x - 4",
+          "is_correct": false
+        },
+        {
+          "text": "f(x) = -7x + 4",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-functions",
+      "prompt": "For a linear function f, f(x) increases by 6 whenever x increases by 2. What is the slope of f?",
+      "explanation": "The slope is change in output divided by change in input: 6/2 = 3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-functions",
+      "prompt": "A linear function f satisfies f(2) = 10 and f(6) = 22. What is f(0)?",
+      "explanation": "The slope is (22 - 10)/(6 - 2) = 3. Using f(x) = 3x + b and f(2) = 10 gives 6 + b = 10, so b = 4. Therefore f(0) = 4.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "4",
+          "is_correct": true
+        },
+        {
+          "text": "6",
+          "is_correct": false
+        },
+        {
+          "text": "8",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-inequalities-in-one-or-two-variables",
+      "prompt": "Which inequality is equivalent to 4x - 5 <= 11?",
+      "explanation": "Add 5 to both sides to get 4x <= 16. Divide by 4 to get x <= 4.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "x <= 4",
+          "is_correct": true
+        },
+        {
+          "text": "x >= 4",
+          "is_correct": false
+        },
+        {
+          "text": "x <= 16",
+          "is_correct": false
+        },
+        {
+          "text": "x >= 16",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-inequalities-in-one-or-two-variables",
+      "prompt": "Solve the inequality: -3x + 7 > 16.",
+      "explanation": "Subtract 7 to get -3x > 9. Divide by -3 and reverse the inequality sign: x < -3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "x > -3",
+          "is_correct": false
+        },
+        {
+          "text": "x < -3",
+          "is_correct": true
+        },
+        {
+          "text": "x > 3",
+          "is_correct": false
+        },
+        {
+          "text": "x < 3",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-inequalities-in-one-or-two-variables",
+      "prompt": "Which ordered pair satisfies 2x + y < 5?",
+      "explanation": "For (1, 2), 2(1) + 2 = 4, and 4 < 5. The other choices do not satisfy the inequality.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "(1, 2)",
+          "is_correct": true
+        },
+        {
+          "text": "(2, 2)",
+          "is_correct": false
+        },
+        {
+          "text": "(3, 0)",
+          "is_correct": false
+        },
+        {
+          "text": "(0, 5)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "linear-inequalities-in-one-or-two-variables",
+      "prompt": "Solve the compound inequality: 5 <= 2x + 1 < 13.",
+      "explanation": "Subtract 1 from all parts: 4 <= 2x < 12. Divide by 2 to get 2 <= x < 6.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2 <= x < 6",
+          "is_correct": true
+        },
+        {
+          "text": "3 <= x < 7",
+          "is_correct": false
+        },
+        {
+          "text": "4 <= x < 12",
+          "is_correct": false
+        },
+        {
+          "text": "x <= 2 or x > 6",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "systems-of-two-linear-equations-in-two-variables",
+      "prompt": "Solve the system: x + y = 10 and x - y = 2.",
+      "explanation": "Add the equations to get 2x = 12, so x = 6. Substitute into x + y = 10 to get y = 4.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "(4, 6)",
+          "is_correct": false
+        },
+        {
+          "text": "(6, 4)",
+          "is_correct": true
+        },
+        {
+          "text": "(8, 2)",
+          "is_correct": false
+        },
+        {
+          "text": "(5, 5)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "systems-of-two-linear-equations-in-two-variables",
+      "prompt": "Solve the system: 2x + 3y = 18 and x - y = 4.",
+      "explanation": "From x - y = 4, x = y + 4. Substitute into the first equation: 2(y + 4) + 3y = 18, so 5y = 10 and y = 2. Then x = 6.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "(6, 2)",
+          "is_correct": true
+        },
+        {
+          "text": "(2, 6)",
+          "is_correct": false
+        },
+        {
+          "text": "(5, 4)",
+          "is_correct": false
+        },
+        {
+          "text": "(4, 2)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "systems-of-two-linear-equations-in-two-variables",
+      "prompt": "How many solutions does the system 4x - 2y = 10 and y = 2x - 5 have?",
+      "explanation": "Rearrange 4x - 2y = 10 by dividing by -2 after moving terms: y = 2x - 5. The two equations are the same line, so there are infinitely many solutions.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "0",
+          "is_correct": false
+        },
+        {
+          "text": "1",
+          "is_correct": false
+        },
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "Infinitely many",
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "skill": "systems-of-two-linear-equations-in-two-variables",
+      "prompt": "How many solutions does the system 3x + 2y = 7 and 6x + 4y = 20 have?",
+      "explanation": "Multiplying the first equation by 2 gives 6x + 4y = 14, which has the same left side as the second equation but a different constant. The lines are parallel, so there is no solution.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "0",
+          "is_correct": true
+        },
+        {
+          "text": "1",
+          "is_correct": false
+        },
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "Infinitely many",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "area-and-volume",
+      "prompt": "A rectangle has length 12 and width 5. What is its area?",
+      "explanation": "The area of a rectangle is length times width: 12 x 5 = 60.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "17",
+          "is_correct": false
+        },
+        {
+          "text": "34",
+          "is_correct": false
+        },
+        {
+          "text": "60",
+          "is_correct": true
+        },
+        {
+          "text": "120",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "area-and-volume",
+      "prompt": "A triangle has base 14 and height 9. What is its area?",
+      "explanation": "The area of a triangle is (1/2)bh. Thus the area is (1/2)(14)(9) = 63.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "23",
+          "is_correct": false
+        },
+        {
+          "text": "63",
+          "is_correct": true
+        },
+        {
+          "text": "126",
+          "is_correct": false
+        },
+        {
+          "text": "252",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "area-and-volume",
+      "prompt": "A rectangular prism has dimensions 3, 4, and 10. What is its volume?",
+      "explanation": "The volume of a rectangular prism is length times width times height: 3 x 4 x 10 = 120.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "17",
+          "is_correct": false
+        },
+        {
+          "text": "60",
+          "is_correct": false
+        },
+        {
+          "text": "120",
+          "is_correct": true
+        },
+        {
+          "text": "240",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "area-and-volume",
+      "prompt": "A right circular cylinder has radius 3 and height 8. What is its volume?",
+      "explanation": "The volume of a cylinder is pi r^2 h. With r = 3 and h = 8, the volume is pi(3^2)(8) = 72pi.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "24pi",
+          "is_correct": false
+        },
+        {
+          "text": "48pi",
+          "is_correct": false
+        },
+        {
+          "text": "72pi",
+          "is_correct": true
+        },
+        {
+          "text": "144pi",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "circles",
+      "prompt": "What is the circumference of a circle with radius 6?",
+      "explanation": "The circumference is 2pi r. With r = 6, the circumference is 12pi.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "6pi",
+          "is_correct": false
+        },
+        {
+          "text": "12pi",
+          "is_correct": true
+        },
+        {
+          "text": "24pi",
+          "is_correct": false
+        },
+        {
+          "text": "36pi",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "circles",
+      "prompt": "What is the area of a circle with diameter 10?",
+      "explanation": "The radius is half the diameter, so r = 5. The area is pi r^2 = 25pi.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "10pi",
+          "is_correct": false
+        },
+        {
+          "text": "20pi",
+          "is_correct": false
+        },
+        {
+          "text": "25pi",
+          "is_correct": true
+        },
+        {
+          "text": "100pi",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "circles",
+      "prompt": "A circle has equation (x - 2)^2 + (y + 3)^2 = 16. What are its center and radius?",
+      "explanation": "The standard form is (x - h)^2 + (y - k)^2 = r^2. Here h = 2, k = -3, and r = 4.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "Center (2, -3), radius 4",
+          "is_correct": true
+        },
+        {
+          "text": "Center (-2, 3), radius 4",
+          "is_correct": false
+        },
+        {
+          "text": "Center (2, 3), radius 16",
+          "is_correct": false
+        },
+        {
+          "text": "Center (-2, -3), radius 16",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "circles",
+      "prompt": "A central angle of 60 degrees intercepts an arc in a circle of radius 9. What is the length of the arc?",
+      "explanation": "Arc length is (theta/360)(2pi r). Thus the arc length is (60/360)(2pi)(9) = 3pi.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "pi",
+          "is_correct": false
+        },
+        {
+          "text": "3pi",
+          "is_correct": true
+        },
+        {
+          "text": "6pi",
+          "is_correct": false
+        },
+        {
+          "text": "9pi",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "lines-angles-and-triangles",
+      "prompt": "Two angles are supplementary. If one angle measures 37 degrees, what is the measure of the other angle?",
+      "explanation": "Supplementary angles sum to 180 degrees. The other angle is 180 - 37 = 143 degrees.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "53 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "127 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "143 degrees",
+          "is_correct": true
+        },
+        {
+          "text": "153 degrees",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "lines-angles-and-triangles",
+      "prompt": "The angle measures of a triangle are x, 2x, and 3x degrees. What is the measure of the largest angle?",
+      "explanation": "The angles of a triangle sum to 180 degrees, so x + 2x + 3x = 180. Thus 6x = 180 and x = 30. The largest angle is 3x = 90 degrees.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "30 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "60 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "90 degrees",
+          "is_correct": true
+        },
+        {
+          "text": "120 degrees",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "lines-angles-and-triangles",
+      "prompt": "Two parallel lines are cut by a transversal. Alternate interior angles are labeled 5x + 10 degrees and 3x + 50 degrees. What is the value of x?",
+      "explanation": "Alternate interior angles are congruent, so 5x + 10 = 3x + 50. Then 2x = 40, so x = 20.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "text": "15",
+          "is_correct": false
+        },
+        {
+          "text": "20",
+          "is_correct": true
+        },
+        {
+          "text": "30",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "lines-angles-and-triangles",
+      "prompt": "In a triangle, two remote interior angles measure 45 degrees and 65 degrees. What is the measure of the exterior angle opposite them?",
+      "explanation": "An exterior angle of a triangle equals the sum of the two remote interior angles: 45 + 65 = 110 degrees.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "65 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "90 degrees",
+          "is_correct": false
+        },
+        {
+          "text": "110 degrees",
+          "is_correct": true
+        },
+        {
+          "text": "135 degrees",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "right-triangles-and-trigonometry",
+      "prompt": "A right triangle has legs of length 6 and 8. What is the length of the hypotenuse?",
+      "explanation": "Use the Pythagorean theorem: c^2 = 6^2 + 8^2 = 36 + 64 = 100. Thus c = 10.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "8",
+          "is_correct": false
+        },
+        {
+          "text": "10",
+          "is_correct": true
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        },
+        {
+          "text": "14",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "right-triangles-and-trigonometry",
+      "prompt": "In a 30-60-90 triangle, the hypotenuse is 14. What is the length of the shorter leg?",
+      "explanation": "In a 30-60-90 triangle, the shorter leg is half the hypotenuse. Half of 14 is 7.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "7",
+          "is_correct": true
+        },
+        {
+          "text": "7sqrt(2)",
+          "is_correct": false
+        },
+        {
+          "text": "7sqrt(3)",
+          "is_correct": false
+        },
+        {
+          "text": "14sqrt(3)",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "right-triangles-and-trigonometry",
+      "prompt": "In a right triangle, angle theta has opposite side 5 and hypotenuse 13. What is sin(theta)?",
+      "explanation": "Sine is opposite divided by hypotenuse, so sin(theta) = 5/13.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "5/12",
+          "is_correct": false
+        },
+        {
+          "text": "5/13",
+          "is_correct": true
+        },
+        {
+          "text": "12/13",
+          "is_correct": false
+        },
+        {
+          "text": "13/5",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "right-triangles-and-trigonometry",
+      "prompt": "In a right triangle, tan(theta) = 3/4. If the side adjacent to theta has length 8, what is the length of the side opposite theta?",
+      "explanation": "Tangent is opposite divided by adjacent. If opposite/8 = 3/4, then opposite = 6.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "4",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": true
+        },
+        {
+          "text": "8",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "evaluating-statistical-claims-observational-studie",
+      "prompt": "A researcher randomly surveys 200 students at a high school about lunch preferences. Which conclusion is best supported?",
+      "explanation": "Because the students were randomly selected from the high school, the results can reasonably be generalized to that high school's students, but not to all students everywhere.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "The results can support conclusions about all high school students in the country.",
+          "is_correct": false
+        },
+        {
+          "text": "The results can support conclusions about students at that high school.",
+          "is_correct": true
+        },
+        {
+          "text": "The survey proves that lunch preferences cause grades to change.",
+          "is_correct": false
+        },
+        {
+          "text": "No conclusion can be drawn from the survey.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "evaluating-statistical-claims-observational-studie",
+      "prompt": "An observational study finds that students who sleep more hours tend to have higher test scores. Which statement is most appropriate?",
+      "explanation": "An observational study can show an association, but it cannot by itself prove that more sleep causes higher test scores because other variables may be involved.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "More sleep definitely causes higher test scores.",
+          "is_correct": false
+        },
+        {
+          "text": "Higher test scores definitely cause students to sleep more.",
+          "is_correct": false
+        },
+        {
+          "text": "There is an association, but causation is not established.",
+          "is_correct": true
+        },
+        {
+          "text": "The study is invalid because it includes two variables.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "evaluating-statistical-claims-observational-studie",
+      "prompt": "A website asks visitors to vote in an online poll about a new school policy. Which issue is most likely to weaken the poll?",
+      "explanation": "A voluntary online poll may overrepresent people who chose to respond and may not represent the whole population.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "The sample may be biased because participation is voluntary.",
+          "is_correct": true
+        },
+        {
+          "text": "The poll has too many respondents to be useful.",
+          "is_correct": false
+        },
+        {
+          "text": "The poll automatically proves causation.",
+          "is_correct": false
+        },
+        {
+          "text": "The policy cannot be studied statistically.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "evaluating-statistical-claims-observational-studie",
+      "prompt": "A study randomly assigns students to either receive tutoring or not receive tutoring, then compares final exam scores. What kind of conclusion may be supported if the study is well designed?",
+      "explanation": "Because students were randomly assigned to treatment groups, a well-designed experiment may support a cause-and-effect conclusion about tutoring and exam scores.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "Tutoring may be causing a difference in exam scores.",
+          "is_correct": true
+        },
+        {
+          "text": "The results can only show association, never causation.",
+          "is_correct": false
+        },
+        {
+          "text": "The sample must be biased because it has two groups.",
+          "is_correct": false
+        },
+        {
+          "text": "No comparison between groups is possible.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "inference-from-sample-statistics-and-margin-of-err",
+      "prompt": "A poll estimates that 58% of voters support a proposal, with a margin of error of 4 percentage points. Which interval represents the likely support?",
+      "explanation": "Subtract and add the margin of error: 58% - 4% = 54% and 58% + 4% = 62%.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "50% to 58%",
+          "is_correct": false
+        },
+        {
+          "text": "54% to 62%",
+          "is_correct": true
+        },
+        {
+          "text": "56% to 60%",
+          "is_correct": false
+        },
+        {
+          "text": "58% to 66%",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "inference-from-sample-statistics-and-margin-of-err",
+      "prompt": "Candidate A has 51% support with a margin of error of 3 percentage points. Candidate B has 47% support with a margin of error of 3 percentage points. Which statement is best supported?",
+      "explanation": "Candidate A's interval is 48% to 54%, and Candidate B's interval is 44% to 50%. Since the intervals overlap, the poll does not clearly show that A leads.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "Candidate A is definitely ahead.",
+          "is_correct": false
+        },
+        {
+          "text": "Candidate B is definitely ahead.",
+          "is_correct": false
+        },
+        {
+          "text": "The intervals overlap, so the lead is not conclusive.",
+          "is_correct": true
+        },
+        {
+          "text": "Both candidates must have exactly 50% support.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "inference-from-sample-statistics-and-margin-of-err",
+      "prompt": "A sample mean is 72 with a margin of error of 5. Which interval is the likely range for the population mean?",
+      "explanation": "Subtract and add the margin of error: 72 - 5 = 67 and 72 + 5 = 77.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "62 to 72",
+          "is_correct": false
+        },
+        {
+          "text": "67 to 77",
+          "is_correct": true
+        },
+        {
+          "text": "70 to 74",
+          "is_correct": false
+        },
+        {
+          "text": "72 to 82",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "inference-from-sample-statistics-and-margin-of-err",
+      "prompt": "All else being equal, what happens to the margin of error when the sample size is increased?",
+      "explanation": "A larger sample size generally reduces sampling variability, so the margin of error decreases.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "It increases.",
+          "is_correct": false
+        },
+        {
+          "text": "It decreases.",
+          "is_correct": true
+        },
+        {
+          "text": "It always becomes 0.",
+          "is_correct": false
+        },
+        {
+          "text": "It is unaffected in every situation.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "one-variable-data-distributions-and-measures-of-ce",
+      "prompt": "What is the mean of the data set 4, 6, 8, 10, 12?",
+      "explanation": "Add the values to get 40, then divide by 5. The mean is 8.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "6",
+          "is_correct": false
+        },
+        {
+          "text": "8",
+          "is_correct": true
+        },
+        {
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "one-variable-data-distributions-and-measures-of-ce",
+      "prompt": "What is the median of the data set 2, 3, 3, 7, 10?",
+      "explanation": "The data are already in order. The middle value is the third value, 3.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "2",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "text": "7",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "one-variable-data-distributions-and-measures-of-ce",
+      "prompt": "A very large value is added to a data set. Which measure is usually affected more: the mean or the median?",
+      "explanation": "An extreme value changes the sum used to calculate the mean, but it may not change the middle value much. The mean is usually affected more.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "Mean",
+          "is_correct": true
+        },
+        {
+          "text": "Median",
+          "is_correct": false
+        },
+        {
+          "text": "They are always affected equally.",
+          "is_correct": false
+        },
+        {
+          "text": "Neither can ever change.",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "one-variable-data-distributions-and-measures-of-ce",
+      "prompt": "What is the range of the data set 15, 22, 18, 30, 25?",
+      "explanation": "The range is the maximum minus the minimum: 30 - 15 = 15.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "8",
+          "is_correct": false
+        },
+        {
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "text": "15",
+          "is_correct": true
+        },
+        {
+          "text": "30",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "percentages",
+      "prompt": "What is 20% of 150?",
+      "explanation": "20% equals 0.20, and 0.20 x 150 = 30.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "20",
+          "is_correct": false
+        },
+        {
+          "text": "25",
+          "is_correct": false
+        },
+        {
+          "text": "30",
+          "is_correct": true
+        },
+        {
+          "text": "35",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "percentages",
+      "prompt": "A price of $80 is increased by 25%. What is the new price?",
+      "explanation": "25% of $80 is $20. Add the increase to get $80 + $20 = $100.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "$85",
+          "is_correct": false
+        },
+        {
+          "text": "$95",
+          "is_correct": false
+        },
+        {
+          "text": "$100",
+          "is_correct": true
+        },
+        {
+          "text": "$105",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "percentages",
+      "prompt": "60 is what percent of 240?",
+      "explanation": "Compute 60/240 = 0.25, which is 25%.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "15%",
+          "is_correct": false
+        },
+        {
+          "text": "20%",
+          "is_correct": false
+        },
+        {
+          "text": "25%",
+          "is_correct": true
+        },
+        {
+          "text": "40%",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "percentages",
+      "prompt": "An item costs $50. It is discounted by 10%, then an 8% sales tax is applied to the discounted price. What is the final price?",
+      "explanation": "A 10% discount on $50 gives $45. An 8% tax on $45 is $3.60, so the final price is $48.60.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "$44.00",
+          "is_correct": false
+        },
+        {
+          "text": "$45.40",
+          "is_correct": false
+        },
+        {
+          "text": "$48.60",
+          "is_correct": true
+        },
+        {
+          "text": "$54.00",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "probability-and-conditional-probability",
+      "prompt": "A bag contains 3 red marbles and 5 blue marbles. What is the probability of choosing a red marble at random?",
+      "explanation": "There are 3 red marbles out of 8 total marbles, so the probability is 3/8.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "3/5",
+          "is_correct": false
+        },
+        {
+          "text": "3/8",
+          "is_correct": true
+        },
+        {
+          "text": "5/8",
+          "is_correct": false
+        },
+        {
+          "text": "5/3",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "probability-and-conditional-probability",
+      "prompt": "A fair coin is flipped twice. What is the probability of getting exactly one head?",
+      "explanation": "The possible outcomes are HH, HT, TH, and TT. Exactly one head occurs in HT and TH, so the probability is 2/4 = 1/2.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "1/4",
+          "is_correct": false
+        },
+        {
+          "text": "1/3",
+          "is_correct": false
+        },
+        {
+          "text": "1/2",
+          "is_correct": true
+        },
+        {
+          "text": "3/4",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "probability-and-conditional-probability",
+      "prompt": "In a class, 5 juniors and 2 seniors are in the debate club. If a debate club member is chosen at random, what is the probability that the student is a junior?",
+      "explanation": "Given that the chosen student is in the debate club, there are 7 possible students, 5 of whom are juniors. The probability is 5/7.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2/7",
+          "is_correct": false
+        },
+        {
+          "text": "5/7",
+          "is_correct": true
+        },
+        {
+          "text": "5/12",
+          "is_correct": false
+        },
+        {
+          "text": "7/12",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "probability-and-conditional-probability",
+      "prompt": "A box has 4 green tiles and 6 yellow tiles. If two tiles are drawn without replacement, what is the probability both are green?",
+      "explanation": "The probability is (4/10)(3/9) = 12/90 = 2/15.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "2/15",
+          "is_correct": true
+        },
+        {
+          "text": "4/25",
+          "is_correct": false
+        },
+        {
+          "text": "1/5",
+          "is_correct": false
+        },
+        {
+          "text": "2/5",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "ratios-rates-proportional-relationships-and-units",
+      "prompt": "If 3 notebooks cost $7.50, how much do 5 notebooks cost at the same unit price?",
+      "explanation": "The unit price is $7.50/3 = $2.50 per notebook. Five notebooks cost 5 x $2.50 = $12.50.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "$10.00",
+          "is_correct": false
+        },
+        {
+          "text": "$12.50",
+          "is_correct": true
+        },
+        {
+          "text": "$15.00",
+          "is_correct": false
+        },
+        {
+          "text": "$17.50",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "ratios-rates-proportional-relationships-and-units",
+      "prompt": "A car travels 180 miles in 3 hours at a constant speed. What is its speed in miles per hour?",
+      "explanation": "Speed equals distance divided by time: 180/3 = 60 miles per hour.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "45",
+          "is_correct": false
+        },
+        {
+          "text": "60",
+          "is_correct": true
+        },
+        {
+          "text": "90",
+          "is_correct": false
+        },
+        {
+          "text": "180",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "ratios-rates-proportional-relationships-and-units",
+      "prompt": "A recipe uses flour and sugar in a ratio of 5:2. If 6 cups of sugar are used, how many cups of flour are needed?",
+      "explanation": "The sugar amount is 3 times the 2-part amount, so the flour amount is 3 times 5, which is 15 cups.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "10",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        },
+        {
+          "text": "15",
+          "is_correct": true
+        },
+        {
+          "text": "18",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "ratios-rates-proportional-relationships-and-units",
+      "prompt": "How many feet are equal to 72 inches?",
+      "explanation": "There are 12 inches in 1 foot. Divide 72 by 12 to get 6 feet.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "5",
+          "is_correct": false
+        },
+        {
+          "text": "6",
+          "is_correct": true
+        },
+        {
+          "text": "7",
+          "is_correct": false
+        },
+        {
+          "text": "12",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "two-variable-data-models-and-scatterplots",
+      "prompt": "A scatterplot shows that as x increases, y also tends to increase. Which description best fits the association?",
+      "explanation": "When both variables tend to increase together, the association is positive.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "Positive association",
+          "is_correct": true
+        },
+        {
+          "text": "Negative association",
+          "is_correct": false
+        },
+        {
+          "text": "No association",
+          "is_correct": false
+        },
+        {
+          "text": "Constant association",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "two-variable-data-models-and-scatterplots",
+      "prompt": "A line of best fit for a data set is y = 2.5x + 10. What does the model predict for y when x = 8?",
+      "explanation": "Substitute x = 8: y = 2.5(8) + 10 = 20 + 10 = 30.",
+      "difficulty": "easy",
+      "choices": [
+        {
+          "text": "18",
+          "is_correct": false
+        },
+        {
+          "text": "20",
+          "is_correct": false
+        },
+        {
+          "text": "30",
+          "is_correct": true
+        },
+        {
+          "text": "38",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "two-variable-data-models-and-scatterplots",
+      "prompt": "For one data point, the actual y-value is 42 and the predicted y-value from the line of best fit is 39. What is the residual?",
+      "explanation": "Residual equals actual value minus predicted value: 42 - 39 = 3.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "-3",
+          "is_correct": false
+        },
+        {
+          "text": "0",
+          "is_correct": false
+        },
+        {
+          "text": "3",
+          "is_correct": true
+        },
+        {
+          "text": "81",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "skill": "two-variable-data-models-and-scatterplots",
+      "prompt": "Which correlation coefficient represents the strongest negative linear association?",
+      "explanation": "A correlation coefficient closer to -1 represents a stronger negative linear association. Among the choices, -0.92 is closest to -1.",
+      "difficulty": "medium",
+      "choices": [
+        {
+          "text": "-0.92",
+          "is_correct": true
+        },
+        {
+          "text": "-0.45",
+          "is_correct": false
+        },
+        {
+          "text": "0.10",
+          "is_correct": false
+        },
+        {
+          "text": "0.88",
+          "is_correct": false
+        }
+      ]
+    }
+  ]
+}
